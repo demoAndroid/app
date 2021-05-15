@@ -1,14 +1,14 @@
 package com.example.truyenol.model;
 
-public class chapter {
-    public int id;
-    public String nameChapter;
-    public String content;
+public class Chapter {
+    private int id;
+    private String nameChapter;
+    private String content;
 
-    public chapter() {
+    public Chapter() {
     }
 
-    public chapter(int id, String nameChapter, String content) {
+    public Chapter(int id, String nameChapter, String content) {
         this.id = id;
         this.nameChapter = nameChapter;
         this.content = content;

@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
 
-public class databaseHandler extends SQLiteOpenHelper {
+public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String TAG = "SQLite";
     //Database version
     private static final int DATABASE_VERSION = 1;
@@ -56,7 +56,7 @@ public class databaseHandler extends SQLiteOpenHelper {
 
     private final Context context;
 
-    public databaseHandler(Context context)  {
+    public DatabaseHandler(Context context)  {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         Log.d("DB Manager","DB Manager");
 
