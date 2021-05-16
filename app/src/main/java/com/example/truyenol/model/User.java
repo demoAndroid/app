@@ -1,18 +1,18 @@
 package com.example.truyenol.model;
 
-public class user {
-    public int id;
-    public String username;
-    public String password;
-    public String fullName;
-    public String email;
-    public String linkAva;
-    public String position;
+public class User {
+    private int id;
+    private String username;
+    private String password;
+    private String fullName;
+    private String email;
+    private String linkAva;
+    private String position;
 
-    public user() {
+    public User() {
     }
 
-    public user(int id, String username, String password, String fullName, String email, String linkAva, String position) {
+    public User(int id, String username, String password, String fullName, String email, String linkAva, String position) {
         this.id = id;
         this.username = username;
         this.password = password;

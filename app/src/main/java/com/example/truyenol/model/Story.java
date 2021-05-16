@@ -1,20 +1,20 @@
 package com.example.truyenol.model;
 
-public class story {
-    public int id;
-    public String nameStory;
-    public String type;
-    public String status;
-    public String description;
-    public String author;
-    public float rating;
-    public String linkImg;
-    public String numberChapter;
+public class Story {
+    private int id;
+    private String nameStory;
+    private String type;
+    private String status;
+    private String description;
+    private String author;
+    private float rating;
+    private String linkImg;
+    private String numberChapter;
 
-    public story() {
+    public Story() {
     }
 
-    public story(int id, String nameStory, String type, String status, String description, String author, float rating, String linkImg, String numberChapter) {
+    public Story(int id, String nameStory, String type, String status, String description, String author, float rating, String linkImg, String numberChapter) {
         this.id = id;
         this.nameStory = nameStory;
         this.type = type;

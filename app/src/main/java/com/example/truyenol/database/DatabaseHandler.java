@@ -1,16 +1,12 @@
 package com.example.truyenol.database;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.truyenol.model.story;
-
-public class databaseHandler extends SQLiteOpenHelper {
+public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String TAG = "SQLite";
     //Database version
     private static final int DATABASE_VERSION = 1;
@@ -60,7 +56,7 @@ public class databaseHandler extends SQLiteOpenHelper {
 
     private final Context context;
 
-    public databaseHandler(Context context)  {
+    public DatabaseHandler(Context context)  {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         Log.d("DB Manager","DB Manager");
 
@@ -124,36 +120,4 @@ public class databaseHandler extends SQLiteOpenHelper {
         onCreate(db);
         Toast.makeText(context, "Drop successfully", Toast.LENGTH_SHORT).show();
     }
-
-    public void addStory(story story){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_NAMESTORY, story.getNameStory());
-        values.put(COLUMN_TYPE, story.getType());
-        values.put(COLUMN_STATUS, story.getStatus());
-        values.put(COLUMN_DESCRIPTION, story.getDescription());
-        values.put(COLUMN_AUTHOR, story.getAuthor());
-        values.put(COLUMN_RATING, story.getRating());
-        values.put(COLUMN_LINKIMG, story.getLinkImg());
-        values.put(COLUMN_NUMBERCHAPTER, story.getNumberChapter());
-
-        db.insert(TABLE_STORY,null,values);
-        db.close();
-    }
-
-    public story getStoryById(int id){
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM story WHERE idStory ="+id+"",null);
-        if (cursor != null)
-            cursor.moveToFirst();
-
-        story story = new story(cursor.getInt(0),cursor.getString(1),
-                cursor.getString(2),cursor.getString(3),cursor.getString(4),
-                cursor.getString(5),cursor.getFloat(6),cursor.getString(7),
-                cursor.getString(8));
-        cursor.close();
-        db.close();
-        return story;
-    }
-
 }

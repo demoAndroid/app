@@ -1,14 +1,14 @@
 package com.example.truyenol.model;
 
-public class comment {
-    public int id;
-    public String comment;
-    public int rating;
+public class Comment {
+    private int id;
+    private String comment;
+    private int rating;
 
-    public comment() {
+    public Comment() {
     }
 
-    public comment(int id, String comment, int rating) {
+    public Comment(int id, String comment, int rating) {
         this.id = id;
         this.comment = comment;
         this.rating = rating;
