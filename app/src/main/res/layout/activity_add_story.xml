@@ -94,8 +94,8 @@
 
     <EditText
         android:id="@+id/typeTxt"
-        android:layout_width="208dp"
-        android:layout_height="25dp"
+        android:layout_width="212dp"
+        android:layout_height="48dp"
         android:textSize="8sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -107,7 +107,7 @@
     <EditText
         android:id="@+id/nameStoryTxt"
         android:layout_width="212dp"
-        android:layout_height="25dp"
+        android:layout_height="39dp"
         android:textSize="8sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -130,8 +130,8 @@
 
     <EditText
         android:id="@+id/authorTxt"
-        android:layout_width="209dp"
-        android:layout_height="22dp"
+        android:layout_width="208dp"
+        android:layout_height="46dp"
         android:textSize="8sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

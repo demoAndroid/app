@@ -41,21 +41,39 @@ public class AddStory extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         chapNumberSpn.setAdapter(adapter);
         //Set linkAvaBtn
+        addChapterBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doAddChapter();
+            }
+        });
         linkAvaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                doSetLinkAva();
             }
         });
     }
+
     public void doSetLinkAva(){
         Intent intent=new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("*/*");
+        startActivityForResult(intent,1);
+
+    }
+    public void doAddChapter(){
+        Intent intent=new Intent(this,ModifyChapter.class);
+        intent.putExtra("storyId",Integer.toString(5));
+        startActivity(intent);
 
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==1&&resultCode==RESULT_OK){
+            String path= data.getData().getPath();
+            linkAvaTxt.setText(path);
+        }
     }
 }
