@@ -1,10 +1,17 @@
 package com.example.truyenol.database;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.example.truyenol.adapter.StoryAdapter;
+import com.example.truyenol.model.Story;
+
+import java.util.ArrayList;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String TAG = "SQLite";
@@ -65,7 +72,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sqlQuery1 = "CREATE TABLE " + TABLE_USER +"( " +
-                COLUMN_ID +"integer primary key autoincrement, " +
+                COLUMN_ID +" integer primary key autoincrement, " +
                 COLUMN_USERNAME + " TEXT, " +
                 COLUMN_PASSWORD + " TEXT, " +
                 COLUMN_FULLNAME + " TEXT, " +
@@ -74,7 +81,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 COLUMN_POSITION + " TEXT)";
 
         String sqlQuery2 = "CREATE TABLE " + TABLE_STORY +"( " +
-                COLUMN_IDSTORY +"integer primary key autoincrement, " +
+                COLUMN_IDSTORY +" integer primary key autoincrement, " +
                 COLUMN_NAMESTORY + " TEXT, " +
                 COLUMN_TYPE + " TEXT, " +
                 COLUMN_STATUS + " TEXT, " +
@@ -85,7 +92,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 COLUMN_RATING + " TEXT)";
 
         String sqlQuery3 = "CREATE TABLE " + TABLE_COMMENT +"( " +
-                COLUMN_IDCOMMENT +"integer primary key autoincrement, " +
+                COLUMN_IDCOMMENT +" integer primary key autoincrement, " +
                 COLUMN_COMMENT + " TEXT, " +
                 COLUMN_RATING_COMMENT + " REAL, " +
                 COLUMN_IDUSER_COMMENT + " INTEGER, " +
@@ -96,7 +103,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 TABLE_USER + "(" +COLUMN_IDSTORY + "))";
 
         String sqlQuery4 = "CREATE TABLE " + TABLE_CHAPTER +"( " +
-                COLUMN_IDCHAPTER +"INTEGER primary key autoincrement, " +
+                COLUMN_IDCHAPTER +" INTEGER primary key autoincrement, " +
                 COLUMN_IDCHAPTER_STORY + " INTEGER, " +
                 COLUMN_NAMECHAPTER + " TEXT, " +
                 COLUMN_CONTENT + " TEXT, " +
@@ -119,5 +126,55 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_COMMENT);
         onCreate(db);
         Toast.makeText(context, "Drop successfully", Toast.LENGTH_SHORT).show();
+    }
+    public void addStory(Story story){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAMESTORY, story.getNameStory());
+        values.put(COLUMN_TYPE, story.getType());
+        values.put(COLUMN_STATUS, story.getStatus());
+        values.put(COLUMN_DESCRIPTION, story.getDescription());
+        values.put(COLUMN_AUTHOR, story.getAuthor());
+        values.put(COLUMN_RATING, story.getRating());
+        values.put(COLUMN_LINKIMG, story.getLinkImg());
+        values.put(COLUMN_NUMBERCHAPTER, story.getNumberChapter());
+
+        db.insert(TABLE_STORY,null,values);
+        db.close();
+    }
+    public void addStoryTest(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAMESTORY,"Phàm nhân tu tiên");
+        values.put(COLUMN_TYPE, "Tiên hiệp");
+        values.put(COLUMN_STATUS, "Còn tiếp");
+        values.put(COLUMN_DESCRIPTION, "Phàm Nhân Tu Tiên là một câu chuyện Tiên Hiệp kể về Hàn Lập - Một người bình thường nhưng lại gặp vô vàn cơ duyên để bước đi trên con đường tu tiên, không phải anh hùng - cũng chẳng phải tiểu nhân, Hàn Lập từng bước khẳng định mình... Liệu Hàn Lập và người yêu có thể cùng bước trên con đường tu tiên và có một cái kết hoàn mỹ? Những thử thách nào đang chờ đợi bọn họ?");
+        values.put(COLUMN_AUTHOR, "Vong Ngữ");
+        values.put(COLUMN_RATING, "7");
+        values.put(COLUMN_LINKIMG, "https://toplist.vn/images/800px/rua-va-tho-230179.jpg");
+        values.put(COLUMN_NUMBERCHAPTER, "3000");
+
+        db.insert(TABLE_STORY,null,values);
+        db.close();
+    }
+    public Cursor getTienHiep(){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor res =  db.rawQuery( "select * from "+TABLE_STORY+" WHERE "+ COLUMN_TYPE+" ='Tiên hiệp' LIMIT 3" , null );
+        return res;
+    }
+    public Story getStoryById(int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM story WHERE idStory ="+id+"",null);
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        Story story = new Story(cursor.getInt(0),cursor.getString(1),
+                cursor.getString(2),cursor.getString(3),cursor.getString(4),
+                cursor.getString(5),cursor.getFloat(6),cursor.getString(7),
+                cursor.getString(8));
+        cursor.close();
+        db.close();
+        return story;
     }
 }

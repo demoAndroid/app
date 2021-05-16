@@ -61,7 +61,7 @@
         app:layout_constraintVertical_bias="0.204" />
 
     <com.google.android.material.chip.Chip
-        android:id="@+id/typeTxt"
+        android:id="@+id/typeBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Thể loại"
@@ -86,7 +86,7 @@
         app:layout_constraintVertical_bias="0.428" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/avaImg"
         android:layout_width="100dp"
         android:layout_height="120dp"
         app:layout_constraintBottom_toBottomOf="parent"
