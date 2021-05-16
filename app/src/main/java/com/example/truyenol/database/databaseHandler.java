@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.truyenol.model.story;
+import com.example.truyenol.model.user;
 
 public class databaseHandler extends SQLiteOpenHelper {
     private static final String TAG = "SQLite";
@@ -154,6 +155,23 @@ public class databaseHandler extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return story;
+    }
+    public Cursor getData(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery(  "SELECT * FROM "+TABLE_USER,null );
+        return res;
+    }
+    public  void  addTaikhoan(user user){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_USERNAME,user.getUsername());
+        values.put(COLUMN_PASSWORD,user.getPassword());
+        values.put(COLUMN_EMAIL,user.getEmail());
+        values.put(COLUMN_LINKAVA,user.getLinkAva());
+        values.put(COLUMN_POSITION,user.getPosition());
+        db.insert(TABLE_USER,null,values);
+        db.close();
+
     }
 
 }

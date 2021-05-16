@@ -10,15 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Truyenol">
         <activity android:name=".activity.MainDangKy"></activity>
-        <activity android:name=".activity.MainDangNhap" />
-        <activity android:name=".activity.ContentActivity" />
-        <activity android:name=".activity.StoryChapterActivity" />
-        <activity android:name=".activity.InfoStoryActivity">
+        <activity android:name=".activity.MainDangNhap">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".activity.ContentActivity" />
+        <activity android:name=".activity.StoryChapterActivity" />
+        <activity android:name=".activity.InfoStoryActivity">
+
         </activity>
     </application>
 
