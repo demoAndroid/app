@@ -160,8 +160,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public Cursor getTienHiep(){
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor res =  db.rawQuery( "select * from "+TABLE_STORY+" WHERE "+ COLUMN_TYPE+" ='Tiên hiệp' LIMIT 3" , null );
+        Cursor res =  db.rawQuery( "select * from "+TABLE_STORY+" WHERE "+COLUMN_TYPE+" ='Tiên hiệp' LIMIT 3" , null );
         return res;
+
+
     }
     public Story getStoryById(int id){
         SQLiteDatabase db = this.getReadableDatabase();

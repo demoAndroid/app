@@ -19,7 +19,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class StoryAdapter extends BaseAdapter {
-    private Context context;
+    private final Context context;
     private ArrayList<Story> listStory = new ArrayList<Story>();
 
     public StoryAdapter(Context context, ArrayList<Story> listStory) {
@@ -47,16 +47,16 @@ public class StoryAdapter extends BaseAdapter {
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder = null;
+        ViewHolder viewHolder = new ViewHolder();
         //Gọi viewHolder
-        viewHolder = new ViewHolder();
+
 
         //Tạo đối tượng layoutInflater giúp get layout ra
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = inflater.inflate(R.layout.show1story,null);
 
 
-        viewHolder.nameStoryTxt = convertView.findViewById(R.id.type1Txt);
+        viewHolder.nameStoryTxt = convertView.findViewById(R.id.nameHomeTxt);
         viewHolder.storyImg = convertView.findViewById(R.id.imgHome);
         convertView.setTag(viewHolder);
 
@@ -65,7 +65,6 @@ public class StoryAdapter extends BaseAdapter {
         viewHolder.nameStoryTxt.setText(truyen.getNameStory());
 
         Picasso.get().load(truyen.getLinkImg()).placeholder(R.drawable.image1).error(R.drawable.image5).into(viewHolder.storyImg);
-
         return convertView;
     }
     public void filterList(ArrayList<Story> filteredList){

@@ -22,9 +22,10 @@ public class HomeActivity extends AppCompatActivity {
     TextView type1Txt = (TextView)findViewById(R.id.type1Txt);
     GridView grid1 = (GridView)findViewById(R.id.gridView1) ;
     ArrayList<Story> tienHiep = new ArrayList<Story>();
+    DatabaseHandler db;
     StoryAdapter storyAdapter;
     public void showTienHiep(){
-        DatabaseHandler db = new DatabaseHandler(getBaseContext());
+        db = new DatabaseHandler(getBaseContext());
         Cursor cursor1 = db.getTienHiep();
         while (cursor1.moveToNext()){
 
@@ -34,12 +35,9 @@ public class HomeActivity extends AppCompatActivity {
             String status = cursor1.getString(3);
             String description = cursor1.getString(4);
             String author = cursor1.getString(5);
-            float rating = cursor1.getFloat(6);
-            String linkImg = cursor1.getString(7);
-            String numberChapter = cursor1.getString(8);
-
-
-
+            float rating= cursor1.getFloat(6);
+            String linkImg= cursor1.getString(7);
+            String numberChapter= cursor1.getString(8);
             tienHiep.add(new Story(id,nameStory,type,status,description,author,rating,linkImg,numberChapter));
 
             storyAdapter = new StoryAdapter(getApplicationContext(),tienHiep);
@@ -56,7 +54,9 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        DatabaseHandler db = new DatabaseHandler(this);
         showTienHiep();
+        db.close();
     }
 
 }
