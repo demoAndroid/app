@@ -9,9 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Truyenol">
-        <activity android:name=".activity.ContentActivity"></activity>
+        <activity android:name=".activity.ModifyStory.ModifyChapter"></activity>
+        <activity android:name=".activity.ContentActivity" />
         <activity android:name=".activity.StoryChapterActivity" />
-        <activity android:name=".activity.InfoStoryActivity">
+        <activity android:name=".activity.ModifyStory.AddStory" />
+        <activity android:name=".activity.ModifyStory.ModifyStory" />
+        <activity android:name=".activity.ModifyStory.DeleteStory" />
+        <activity android:name=".activity.ModifyStory.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
