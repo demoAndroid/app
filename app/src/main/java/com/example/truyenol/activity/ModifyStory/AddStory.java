@@ -63,8 +63,8 @@ public class AddStory extends AppCompatActivity {
     }
     public void doAddChapter(){
         Intent intent=new Intent(this,ModifyChapter.class);
-        intent.putExtra("storyId",Integer.toString(5));
-        startActivity(intent);
+        intent.putExtra("chapNumber",chapNumberSpn.getSelectedItem().toString());
+        startActivityForResult(intent,2);
 
     }
 
@@ -74,6 +74,13 @@ public class AddStory extends AppCompatActivity {
         if(requestCode==1&&resultCode==RESULT_OK){
             String path= data.getData().getPath();
             linkAvaTxt.setText(path);
+        }
+        if(requestCode==2&&requestCode==RESULT_OK){
+            for(Integer i=0;i<2*chapterList.size();i+=2){
+                data.getStringExtra(i.toString());i++;
+                data.getStringExtra(i.toString());
+            }
+
         }
     }
 }
