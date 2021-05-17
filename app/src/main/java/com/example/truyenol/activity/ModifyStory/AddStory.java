@@ -8,12 +8,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.truyenol.R;
+import com.example.truyenol.model.Chapter;
 
+import java.util.ArrayList;
 import java.util.Collections;
 
 public class AddStory extends AppCompatActivity {
@@ -33,13 +36,6 @@ public class AddStory extends AppCompatActivity {
         linkAvaTxt=findViewById(R.id.linkTxt1);
         linkAvaBtn=findViewById(R.id.linkAvaBtn);
         addChapterBtn=findViewById(R.id.addChapterBtn);
-        chapNumberSpn=findViewById(R.id.spinner);
-        //Set spinner
-        String[] oneTo100=new String[100];
-        for(int i=0;i<100;i++) oneTo100[i]=""+(i+1);
-        ArrayAdapter adapter=new ArrayAdapter(this,android.R.layout.simple_spinner_item, oneTo100);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        chapNumberSpn.setAdapter(adapter);
         //Set linkAvaBtn
         addChapterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +59,6 @@ public class AddStory extends AppCompatActivity {
     }
     public void doAddChapter(){
         Intent intent=new Intent(this,ModifyChapter.class);
-        intent.putExtra("chapNumber",chapNumberSpn.getSelectedItem().toString());
         startActivityForResult(intent,2);
 
     }
@@ -75,12 +70,13 @@ public class AddStory extends AppCompatActivity {
             String path= data.getData().getPath();
             linkAvaTxt.setText(path);
         }
-        if(requestCode==2&&requestCode==RESULT_OK){
-            for(Integer i=0;i<2*chapterList.size();i+=2){
-                data.getStringExtra(i.toString());i++;
-                data.getStringExtra(i.toString());
+        if(requestCode==2&&resultCode==RESULT_OK){
+            ArrayList<Chapter> chapterList=new ArrayList<Chapter>();
+            for(Integer i=0;i<2*Integer.parseInt(data.getStringExtra("chapterNumber"));i++){
+                String nameChapter=data.getStringExtra(i.toString());i++;
+                String content=data.getStringExtra(i.toString());
+                chapterList.add(new Chapter(nameChapter,content));
             }
-
         }
     }
 }
