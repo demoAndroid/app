@@ -7,23 +7,38 @@ public class Story {
     private String status;
     private String description;
     private String author;
-    private float rating;
     private String linkImg;
     private String numberChapter;
+    private String rating;
 
     public Story() {
     }
 
-    public Story(int id, String nameStory, String type, String status, String description, String author, float rating, String linkImg, String numberChapter) {
+    public Story(int id, String nameStory, String type, String status, String description, String author, String linkImg, String numberChapter, String rating) {
         this.id = id;
         this.nameStory = nameStory;
         this.type = type;
         this.status = status;
         this.description = description;
         this.author = author;
-        this.rating = rating;
         this.linkImg = linkImg;
         this.numberChapter = numberChapter;
+        this.rating = rating;
+    }
+
+    @Override
+    public String toString() {
+        return "Story{" +
+                "id=" + id +
+                ", nameStory='" + nameStory + '\'' +
+                ", type='" + type + '\'' +
+                ", status='" + status + '\'' +
+                ", description='" + description + '\'' +
+                ", author='" + author + '\'' +
+                ", linkImg='" + linkImg + '\'' +
+                ", numberChapter='" + numberChapter + '\'' +
+                ", rating='" + rating + '\'' +
+                '}';
     }
 
     public int getId() {
@@ -74,11 +89,11 @@ public class Story {
         this.author = author;
     }
 
-    public float getRating() {
+    public String getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 

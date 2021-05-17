@@ -8,10 +8,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.truyenol.R;
 import com.example.truyenol.adapter.StoryAdapter;
 import com.example.truyenol.model.Story;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String TAG = "SQLite";
@@ -64,7 +66,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private final Context context;
 
     public DatabaseHandler(Context context)  {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        super(context, DATABASE_NAME, null, 1);
         Log.d("DB Manager","DB Manager");
 
         this.context=context;
@@ -151,19 +153,51 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(COLUMN_DESCRIPTION, "Phàm Nhân Tu Tiên là một câu chuyện Tiên Hiệp kể về Hàn Lập - Một người bình thường nhưng lại gặp vô vàn cơ duyên để bước đi trên con đường tu tiên, không phải anh hùng - cũng chẳng phải tiểu nhân, Hàn Lập từng bước khẳng định mình... Liệu Hàn Lập và người yêu có thể cùng bước trên con đường tu tiên và có một cái kết hoàn mỹ? Những thử thách nào đang chờ đợi bọn họ?");
         values.put(COLUMN_AUTHOR, "Vong Ngữ");
         values.put(COLUMN_RATING, "7");
-        values.put(COLUMN_LINKIMG, "https://toplist.vn/images/800px/rua-va-tho-230179.jpg");
+        values.put(COLUMN_LINKIMG, "R.drawable.image1");
         values.put(COLUMN_NUMBERCHAPTER, "3000");
-
         db.insert(TABLE_STORY,null,values);
         db.close();
     }
-    public Cursor getTienHiep(){
+    public ArrayList<Story> getTienHiep(){
         SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor res =  db.rawQuery( "select * from "+TABLE_STORY+" WHERE "+COLUMN_TYPE+" ='Tiên hiệp' LIMIT 3" , null );
-        return res;
-
-
+        ArrayList<Story> listTh = new ArrayList<>();
+        Cursor cursor =  db.rawQuery( "select * from "+TABLE_STORY+" WHERE "+COLUMN_TYPE+" ='Tiên hiệp' LIMIT 6" , null );
+        if (cursor.moveToFirst()) {
+            do {
+                Story story = new Story();
+                story.setId(cursor.getInt(0));
+                story.setNameStory(cursor.getString(1));
+                story.setType(cursor.getString(2));
+                story.setStatus(cursor.getString(3));
+                story.setDescription(cursor.getString(4));
+                story.setAuthor(cursor.getString(5));
+                story.setLinkImg(cursor.getString(6));
+                story.setNumberChapter(cursor.getString(7));
+                story.setRating(cursor.getString(8));
+                listTh.add(story);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return listTh;
+    }
+    public ArrayList<Story> getStoryHome(){
+        ArrayList<Story> listStory = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "SELECT "+ COLUMN_NAMESTORY +", "+COLUMN_LINKIMG+ ", "+COLUMN_LINKIMG+ " FROM "+TABLE_STORY+" LIMIT 6";
+        Cursor cursor = db.rawQuery(sql,null);
+        if (cursor.moveToFirst()) {
+            do {
+                Story story = new Story();
+                story.setId(cursor.getInt(0));
+                story.setNameStory(cursor.getString(1));
+                story.setLinkImg(cursor.getString(7));
+                listStory.add(story);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return listStory;
     }
     public Story getStoryById(int id){
         SQLiteDatabase db = this.getReadableDatabase();
@@ -173,10 +207,60 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         Story story = new Story(cursor.getInt(0),cursor.getString(1),
                 cursor.getString(2),cursor.getString(3),cursor.getString(4),
-                cursor.getString(5),cursor.getFloat(6),cursor.getString(7),
+                cursor.getString(5),cursor.getString(6),cursor.getString(7),
                 cursor.getString(8));
         cursor.close();
         db.close();
         return story;
+    }
+    public ArrayList<Story> getAllStory() {
+
+        ArrayList<Story> listStory = new ArrayList<Story>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_STORY;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Story story = new Story();
+                story.setId(cursor.getInt(0));
+                story.setNameStory(cursor.getString(1));
+                story.setType(cursor.getString(2));
+                story.setStatus(cursor.getString(3));
+                story.setDescription(cursor.getString(4));
+                story.setAuthor(cursor.getString(5));
+                story.setLinkImg(cursor.getString(6));
+                story.setNumberChapter(cursor.getString(7));
+                story.setRating(cursor.getString(8));
+                listStory.add(story);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return listStory;
+    }
+    public List<Story> getNameStory() {
+
+        List<Story> listStory = new ArrayList<Story>();
+        // Select All Query
+        String selectQuery = "SELECT * FROM " + TABLE_STORY;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Story story = new Story();
+                story.setNameStory(cursor.getString(1));
+                listStory.add(story);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return listStory;
     }
 }
