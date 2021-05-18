@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,12 +62,16 @@ public class StoryAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, InfoStoryActivity.class);
+                Bundle bundle = new Bundle();
                 //Truyền data
-                intent.putExtra("id",list.get(position).getId());
-                intent.putExtra("nameStory",list.get(position).getNameStory());
-                intent.putExtra("author",list.get(position).getAuthor());
-                intent.putExtra("status",list.get(position).getStatus());
-                intent.putExtra("type",list.get(position).getType());
+                bundle.putInt("id", list.get(position).getId());
+                bundle.putString("linkImg",list.get(position).getLinkImg());
+                bundle.putString("nameStory",list.get(position).getNameStory());
+                bundle.putString("author",list.get(position).getAuthor());
+                bundle.putString("status",list.get(position).getStatus());
+                bundle.putString("type",list.get(position).getType());
+                bundle.putString("description",list.get(position).getDescription());
+                intent.putExtras(bundle);
 
                 context.startActivity(intent);
             }

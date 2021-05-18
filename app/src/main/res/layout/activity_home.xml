@@ -10,25 +10,31 @@
         <TextView
             android:id="@+id/type1Txt"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="27dp"
+            android:fontFamily="serif"
             android:text="Tiên hiệp"
             android:textColor="#F44336"
-            android:textSize="34sp"
-            android:fontFamily="serif"/>
+            android:textSize="20sp" />
 "
 
         <GridView
             android:id="@+id/gridView1"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:numColumns="3"
-            android:padding="5dp" />
+            android:layout_height="295dp"
+            android:numColumns="4" />
+
         <TextView
             android:id="@+id/type2Txt"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="27dp"
+            android:fontFamily="serif"
             android:text="Ngôn tình"
             android:textColor="#F44336"
-            android:textSize="34sp"
-            android:fontFamily="serif"/>
+            android:textSize="20sp" />
+
+        <GridView
+            android:id="@+id/gridView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:numColumns="4"/>
 </LinearLayout>

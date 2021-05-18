@@ -29,12 +29,19 @@ public class HomeActivity extends AppCompatActivity {
     StoryAdapter storyAdapter;
     protected void showTienHiep()
     {
-
         DatabaseHandler db1 = new DatabaseHandler(getBaseContext());
         final ArrayList<Story> list1 = db1.getTienHiep();
         GridView lv1= (GridView)findViewById(R.id.gridView1);
         StoryAdapter adapter = new StoryAdapter(this,list1);
         lv1.setAdapter(adapter);
+    }
+    protected void showNgonTinh()
+    {
+        DatabaseHandler db1 = new DatabaseHandler(getBaseContext());
+        final ArrayList<Story> list2 = db1.getNgonTinh();
+        GridView lv2= (GridView)findViewById(R.id.gridView2);
+        StoryAdapter adapter = new StoryAdapter(this,list2);
+        lv2.setAdapter(adapter);
     }
 
     @Override
@@ -42,6 +49,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         showTienHiep();
+        showNgonTinh();
     }
 
 }

@@ -37,4 +37,13 @@ public class Chapter {
     public void setContent(String content) {
         this.content = content;
     }
+
+    @Override
+    public String toString() {
+        return "Chapter{" +
+                "id=" + id +
+                ", nameChapter='" + nameChapter + '\'' +
+                ", content='" + content + '\'' +
+                '}';
+    }
 }
