@@ -1,9 +1,11 @@
 package com.example.truyenol.activity.ModifyStory;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,12 +17,16 @@ import android.widget.Toast;
 import com.example.truyenol.R;
 import com.example.truyenol.model.Chapter;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ModifyChapter extends AppCompatActivity {
     private Spinner chapterSpn;
     private EditText contentTxt, nameChapTxt, chapNumberTxt;
-    private Button saveBtn, confBtn, conf1Btn;
+    private Button saveBtn, confBtn, conf1Btn,button;
     private ArrayList<Chapter> chapterList;
 
     @Override
@@ -92,31 +98,36 @@ public class ModifyChapter extends AppCompatActivity {
     }
 
     public void confirmChapterNumber() {
-        if (confBtn.isEnabled() == false) {
-            conf1Btn.setText("Hủy");
-            chapterSpn.setEnabled(true);
-            saveBtn.setEnabled(true);
-            confBtn.setEnabled(true);
-            chapNumberTxt.setEnabled(false);
-            //Set chapterList
-            int n = Integer.parseInt(chapNumberTxt.getText().toString());
-            String[] oneToN = new String[n];
-            chapterList = new ArrayList<Chapter>();
-            for (int i = 0; i < n; i++) {
-                chapterList.add(new Chapter("", ""));
-                oneToN[i] = "" + (i + 1);
+        if(chapNumberTxt.getText().toString().isEmpty())
+            Toast.makeText(getBaseContext(),"Không để trống số chương",Toast.LENGTH_SHORT).show();
+        else{
+            if (confBtn.isEnabled() == false) {
+                conf1Btn.setText("Hủy");
+                chapterSpn.setEnabled(true);
+                saveBtn.setEnabled(true);
+                confBtn.setEnabled(true);
+                chapNumberTxt.setEnabled(false);
+                //Set chapterList
+                int n = Integer.parseInt(chapNumberTxt.getText().toString());
+                String[] oneToN = new String[n];
+                chapterList = new ArrayList<Chapter>();
+                for (int i = 0; i < n; i++) {
+                    chapterList.add(new Chapter("", ""));
+                    oneToN[i] = "" + (i + 1);
+                }
+                ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, oneToN);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                chapterSpn.setAdapter(adapter);
+            } else {
+                conf1Btn.setText("OK");
+                contentTxt.setEnabled(false);
+                saveBtn.setEnabled(false);
+                nameChapTxt.setEnabled(false);
+                chapterSpn.setEnabled(false);
+                confBtn.setEnabled(false);
+                chapNumberTxt.setEnabled(true);
             }
-            ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, oneToN);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            chapterSpn.setAdapter(adapter);
-        } else {
-            conf1Btn.setText("OK");
-            contentTxt.setEnabled(false);
-            saveBtn.setEnabled(false);
-            nameChapTxt.setEnabled(false);
-            chapterSpn.setEnabled(false);
-            confBtn.setEnabled(false);
-            chapNumberTxt.setEnabled(true);
         }
     }
+
 }
