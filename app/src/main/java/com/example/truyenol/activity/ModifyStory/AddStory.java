@@ -14,7 +14,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.truyenol.R;
+import com.example.truyenol.database.DatabaseHandler;
 import com.example.truyenol.model.Chapter;
+import com.example.truyenol.model.Story;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,8 +24,11 @@ import java.util.Collections;
 public class AddStory extends AppCompatActivity {
     private EditText storyTxt,typeTxt,authorTxt,desTxt;
     private TextView linkAvaTxt;
-    private Button linkAvaBtn,addChapterBtn;
+    private Button linkAvaBtn,addChapterBtn,saveBtn;
     private Spinner chapNumberSpn;
+    private ArrayList<Chapter> chapterList;
+    private int chapterNumber;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +41,7 @@ public class AddStory extends AppCompatActivity {
         linkAvaTxt=findViewById(R.id.linkTxt1);
         linkAvaBtn=findViewById(R.id.linkAvaBtn);
         addChapterBtn=findViewById(R.id.addChapterBtn);
+        saveBtn=findViewById(R.id.saveBtn);
         //Set linkAvaBtn
         addChapterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +53,12 @@ public class AddStory extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 doSetLinkAva();
+            }
+        });
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveStory();
             }
         });
     }
@@ -62,7 +74,23 @@ public class AddStory extends AppCompatActivity {
         startActivityForResult(intent,2);
 
     }
-
+    public void saveStory(){
+        Story story=new Story();
+        DatabaseHandler db=new DatabaseHandler(getBaseContext());
+        story.setAuthor(authorTxt.getText().toString());
+        story.setChapters(chapterList);
+        story.setDescription(desTxt.getText().toString());
+        story.setType(typeTxt.getText().toString());
+        story.setLinkImg(linkAvaTxt.getText().toString());
+        story.setNumberChapter(chapterNumber);
+        story.setNameStory(storyTxt.getText().toString());
+        db.addStory(story);
+        db.close();
+        Toast.makeText(this,"Save data success!",Toast.LENGTH_SHORT).show();
+        Intent intent=new Intent(this,MainActivity.class);
+        finish();
+        startActivity(intent);
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -71,7 +99,8 @@ public class AddStory extends AppCompatActivity {
             linkAvaTxt.setText(path);
         }
         if(requestCode==2&&resultCode==RESULT_OK){
-            ArrayList<Chapter> chapterList=new ArrayList<Chapter>();
+            chapterList=new ArrayList<Chapter>();
+            chapterNumber =Integer.parseInt(data.getStringExtra("chapterNumber"));
             for(Integer i=0;i<2*Integer.parseInt(data.getStringExtra("chapterNumber"));i++){
                 String nameChapter=data.getStringExtra(i.toString());i++;
                 String content=data.getStringExtra(i.toString());

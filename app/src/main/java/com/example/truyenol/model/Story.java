@@ -1,20 +1,23 @@
 package com.example.truyenol.model;
 
+import java.util.ArrayList;
+
 public class Story {
     private int id;
     private String nameStory;
     private String type;
-    private String status;
+    private boolean status;
     private String description;
     private String author;
     private float rating;
     private String linkImg;
-    private String numberChapter;
+    private int numberChapter;
+    private ArrayList<Chapter> chapters;
 
     public Story() {
     }
 
-    public Story(int id, String nameStory, String type, String status, String description, String author, float rating, String linkImg, String numberChapter) {
+    public Story(int id, String nameStory, String type, boolean status, String description, String author, float rating, String linkImg, int numberChapter, ArrayList<Chapter> chapters) {
         this.id = id;
         this.nameStory = nameStory;
         this.type = type;
@@ -24,6 +27,7 @@ public class Story {
         this.rating = rating;
         this.linkImg = linkImg;
         this.numberChapter = numberChapter;
+        this.chapters = chapters;
     }
 
     public int getId() {
@@ -50,11 +54,11 @@ public class Story {
         this.type = type;
     }
 
-    public String getStatus() {
+    public boolean getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 
@@ -90,11 +94,19 @@ public class Story {
         this.linkImg = linkImg;
     }
 
-    public String getNumberChapter() {
+    public int getNumberChapter() {
         return numberChapter;
     }
 
-    public void setNumberChapter(String numberChapter) {
+    public ArrayList<Chapter> getChapters() {
+        return chapters;
+    }
+
+    public void setChapters(ArrayList<Chapter> chapters) {
+        this.chapters = chapters;
+    }
+
+    public void setNumberChapter(int numberChapter) {
         this.numberChapter = numberChapter;
     }
 }

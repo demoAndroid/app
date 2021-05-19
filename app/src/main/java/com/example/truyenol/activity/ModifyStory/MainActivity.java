@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 openDeleteStoryActivity();
             }
         });
+
     }
     public void openAddStoryActivity(){
         Intent intent=new Intent(this,AddStory.class);

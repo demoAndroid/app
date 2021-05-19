@@ -129,7 +129,7 @@
         app:layout_constraintVertical_bias="0.234" />
 
     <Button
-        android:id="@+id/contentTxt"
+        android:id="@+id/saveBtn"
         android:layout_width="57dp"
         android:layout_height="32dp"
         android:text="Lưu"
