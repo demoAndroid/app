@@ -73,7 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
-        android:text="Nhập lại Password"
+        android:text="Fullname"
         android:textColor="#333"
         android:textSize="15dp"
         android:textStyle="bold"
@@ -86,11 +86,11 @@
         android:layout_gravity="center">
 
         <EditText
-            android:id="@+id/editrepass"
+            android:id="@+id/editfullname"
             android:layout_width="350dp"
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
-            android:hint="Nhập Lại Password" />
+            android:hint="Nhập Fullname" />
 
     </LinearLayout>
 
@@ -143,7 +143,7 @@
             android:layout_height="100dp"
             android:layout_gravity="center"
             android:layout_marginRight="20dp"
-            android:src="@drawable/image1"
+            android:src="@drawable/ic_baseline_image_24"
             android:text="Chon ảnh" />
 
         <Button

@@ -69,8 +69,8 @@ public class databaseHandler extends SQLiteOpenHelper {
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sqlQuery1 = "CREATE TABLE " + TABLE_USER +"( " +
-                COLUMN_ID +"integer primary key autoincrement, " +
+        String sqlQuery1 = "CREATE TABLE " + TABLE_USER +" ( " +
+                COLUMN_ID + " integer primary key autoincrement, " +
                 COLUMN_USERNAME + " TEXT, " +
                 COLUMN_PASSWORD + " TEXT, " +
                 COLUMN_FULLNAME + " TEXT, " +
@@ -79,7 +79,7 @@ public class databaseHandler extends SQLiteOpenHelper {
                 COLUMN_POSITION + " TEXT)";
 
         String sqlQuery2 = "CREATE TABLE " + TABLE_STORY +"( " +
-                COLUMN_IDSTORY +"integer primary key autoincrement, " +
+                COLUMN_IDSTORY +" integer primary key autoincrement, " +
                 COLUMN_NAMESTORY + " TEXT, " +
                 COLUMN_TYPE + " TEXT, " +
                 COLUMN_STATUS + " TEXT, " +
@@ -90,7 +90,7 @@ public class databaseHandler extends SQLiteOpenHelper {
                 COLUMN_RATING + " TEXT)";
 
         String sqlQuery3 = "CREATE TABLE " + TABLE_COMMENT +"( " +
-                COLUMN_IDCOMMENT +"integer primary key autoincrement, " +
+                COLUMN_IDCOMMENT +" integer primary key autoincrement, " +
                 COLUMN_COMMENT + " TEXT, " +
                 COLUMN_RATING_COMMENT + " REAL, " +
                 COLUMN_IDUSER_COMMENT + " INTEGER, " +
@@ -101,7 +101,7 @@ public class databaseHandler extends SQLiteOpenHelper {
                 TABLE_USER + "(" +COLUMN_IDSTORY + "))";
 
         String sqlQuery4 = "CREATE TABLE " + TABLE_CHAPTER +"( " +
-                COLUMN_IDCHAPTER +"INTEGER primary key autoincrement, " +
+                COLUMN_IDCHAPTER +" INTEGER primary key autoincrement, " +
                 COLUMN_IDCHAPTER_STORY + " INTEGER, " +
                 COLUMN_NAMECHAPTER + " TEXT, " +
                 COLUMN_CONTENT + " TEXT, " +
@@ -166,11 +166,13 @@ public class databaseHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(COLUMN_USERNAME,user.getUsername());
         values.put(COLUMN_PASSWORD,user.getPassword());
+        values.put(COLUMN_FULLNAME,user.getFullName());
         values.put(COLUMN_EMAIL,user.getEmail());
         values.put(COLUMN_LINKAVA,user.getLinkAva());
         values.put(COLUMN_POSITION,user.getPosition());
         db.insert(TABLE_USER,null,values);
         db.close();
+        Log.e("ADD TK","TC");
 
     }
 

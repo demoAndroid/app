@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,7 +51,6 @@ public class MainDangNhap extends AppCompatActivity {
 
                     //nếu tài khoản và mật khẩu nhập tư bàn phím khớp với ở database
                     if (datausername.equals(tentaikhoan)&&datapassword.equals(matkhau)){
-
                         int phanquyen = cursor.getInt(6);
                         int idd = cursor.getInt(0);
                         String email = cursor.getString(4);
@@ -63,6 +63,9 @@ public class MainDangNhap extends AppCompatActivity {
                         intent.putExtra("email",email);
                         intent.putExtra("fullname",fullname);
                         startActivity(intent);
+                        if (tentaikhoan.equals("") || matkhau.equals("")){
+                            Log.e("Thiếu thông tin", "Thất bại");
+                        }
 
                     }
                 }

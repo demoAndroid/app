@@ -9,10 +9,10 @@ public class user {
     public String linkAva;
     public String position;
 
-    public user() {
+    public user(String username, String password, String email, int position) {
     }
 
-    public user(int id, String username, String password, String fullName, String email, String linkAva, String position) {
+    public user(String s, String username, String password, String fullName, String email) {
         this.id = id;
         this.username = username;
         this.password = password;
