@@ -141,25 +141,24 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 //        cursor.close();
         db.close();
     }
-    public void addChapters(ArrayList<Chapter> chapters,int idStory){
+    public void addChapter(Chapter chapter,int idStory){
         SQLiteDatabase db= this.getWritableDatabase();
         ContentValues values=new ContentValues();
         db.delete(TABLE_CHAPTER,COLUMN_IDCHAPTER_STORY+"=?",new String[]{String.valueOf(idStory)});
-        for(int i=0;i<chapters.size();i++){
             values.put(COLUMN_IDCHAPTER_STORY, idStory);
-            values.put(COLUMN_NAMECHAPTER,chapters.get(i).getNameChapter());
-            values.put(COLUMN_CONTENT, chapters.get(i).getContent());
+            values.put(COLUMN_NAMECHAPTER,chapter.getNameChapter());
+            values.put(COLUMN_CONTENT, chapter.getContent());
             db.insert(TABLE_CHAPTER,null,values);
-        }
         db.close();
     }
     public ArrayList<Chapter> getChapters(int idStory){
         ArrayList<Chapter> chapters=new ArrayList<>();
         SQLiteDatabase db=this.getReadableDatabase();
-        Cursor cursor=db.query(TABLE_CHAPTER,new String[]{COLUMN_NAMECHAPTER,COLUMN_CONTENT},
+        Cursor cursor=db.query(TABLE_CHAPTER,new String[]{COLUMN_IDCHAPTER_STORY,COLUMN_NAMECHAPTER,COLUMN_CONTENT},
                 COLUMN_IDCHAPTER_STORY+"=?",new String[]{String.valueOf(idStory)},null,null,null);
         if(cursor.moveToFirst()) do{
-            Chapter chapter=new Chapter(cursor.getString(0), cursor.getString(1));
+            Chapter chapter=new Chapter(cursor.getString(1), cursor.getString(2));
+            chapter.setId(cursor.getInt(0));
             chapters.add(chapter);
         }while(cursor.moveToNext());
         cursor.close();
@@ -174,7 +173,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         cursor.close();
         return result;
     }
-
+    public void updateChapter(Chapter chapter){
+        SQLiteDatabase db= this.getWritableDatabase();
+        ContentValues value=new ContentValues();
+        value.put(COLUMN_NAMECHAPTER,chapter.getNameChapter());
+        value.put(COLUMN_CONTENT,chapter.getContent());
+        db.update(TABLE_CHAPTER,value,COLUMN_IDCHAPTER+"=?",new String[]{String.valueOf(chapter.getId())});
+        db.close();
+    }
     public ArrayList<Story> getStoriesByName(String nameStory){
         ArrayList<Story> stories=new ArrayList<>();
         SQLiteDatabase db= this.getReadableDatabase();
@@ -216,6 +222,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(COLUMN_LINKIMG,story.getLinkImg());
         values.put(COLUMN_NUMBERCHAPTER,story.getNumberChapter());
         db.update(TABLE_STORY,values,COLUMN_IDSTORY+"=?",new String[]{String.valueOf(story.getId())});
+        db.close();
+    }
+    public void deleteChapter(int idStory){
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.delete(TABLE_CHAPTER,COLUMN_IDCHAPTER_STORY+"=?"+" AND "+"MAX("+COLUMN_IDCHAPTER+") ",new String[]{String.valueOf(idStory)});
         db.close();
     }
 }

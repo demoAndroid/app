@@ -60,7 +60,7 @@ public class SearchStory extends AppCompatActivity {
             else
                 intent = new Intent(this,ModifyChapter.class);;
             intent.putExtra("id",String.valueOf(storyList.get(position).getId()));
-            intent.putExtra("numberChapter",String.valueOf(storyList.get(position).getNumberChapter()));
+            intent.putExtra("chapterNumber",String.valueOf(storyList.get(position).getNumberChapter()));
             finish();
             startActivity(intent);
         }

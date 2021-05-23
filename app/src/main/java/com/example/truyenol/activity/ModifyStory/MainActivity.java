@@ -22,12 +22,13 @@ import java.io.OutputStream;
 public class MainActivity extends AppCompatActivity {
     private Button addBtn;
     private Button modifyBtn;
-    private Button deleteBtn;
+    private Button deleteBtn,modChapBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         addBtn=findViewById(R.id.addBtn);
+        modChapBtn=findViewById(R.id.addChapBtn);
         modifyBtn=findViewById(R.id.modifyBtn);
         deleteBtn=findViewById(R.id.deleteBtn);
         addBtn.setOnClickListener(new View.OnClickListener() {
@@ -48,6 +49,12 @@ public class MainActivity extends AppCompatActivity {
                 openDeleteStoryActivity();
             }
         });
+        modChapBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openModifyChapterActivity();
+            }
+        });
 
     }
     public void openAddStoryActivity(){
@@ -63,6 +70,12 @@ public class MainActivity extends AppCompatActivity {
         Intent intent=new Intent(this,SearchStory.class);
 
         intent.putExtra("act","2");
+        startActivity(intent);
+    }
+    public void openModifyChapterActivity(){
+        Intent intent=new Intent(this,SearchStory.class);
+
+        intent.putExtra("act","3");
         startActivity(intent);
     }
 

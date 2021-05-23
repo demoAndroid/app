@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.truyenol.R;
+import com.example.truyenol.database.DatabaseHandler;
 import com.example.truyenol.model.Chapter;
 
 import java.io.BufferedReader;
@@ -26,17 +27,42 @@ import java.util.ArrayList;
 public class ModifyChapter extends AppCompatActivity {
     private Spinner chapterSpn;
     private EditText contentTxt, nameChapTxt;
-    private Button saveBtn, confBtn;
+    private Button saveBtn, confBtn,addBtn,delBtn,modBtn;
     private ArrayList<Chapter> chapterList;
+    private int chapterNumber,idStory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_chapter);
         //Gán biến view
+        getInital();
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addChapter();
+            }
+        });
+        delBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        modBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                modChapter();
+            }
+        });
+    }
+    public void getInital(){
         nameChapTxt = findViewById(R.id.nameChapTxt);
         chapterSpn = findViewById(R.id.chapterSpn);
         contentTxt = findViewById(R.id.contentTxt);
+        addBtn=findViewById(R.id.addBtn);
+        delBtn=findViewById(R.id.delBtn);
+        modBtn=findViewById(R.id.modBtn);
         saveBtn = findViewById(R.id.saveBtn);
         confBtn = findViewById(R.id.confBtn);
         contentTxt.setEnabled(false);
@@ -44,49 +70,89 @@ public class ModifyChapter extends AppCompatActivity {
         chapterSpn.setEnabled(false);
         saveBtn.setEnabled(false);
         confBtn.setEnabled(false);
-        confBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int index=Integer.parseInt(chapterSpn.getSelectedItem().toString())-1;
-                setChapters(index);
-
-            }
-        });
+        Intent intent=this.getIntent();
+        chapterNumber=Integer.parseInt(intent.getStringExtra("chapterNumber"));
+        idStory=Integer.parseInt(intent.getStringExtra("id"));
+    }
+    public void addChapter(){
+        contentTxt.setEnabled(true);
+        nameChapTxt.setEnabled(true);
+        saveBtn.setEnabled(true);
+        addBtn.setEnabled(false);
+        delBtn.setEnabled(false);
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                doSaveResult();
+                String content=contentTxt.getText().toString();
+                String name=nameChapTxt.getText().toString();
+                DatabaseHandler db=new DatabaseHandler(getBaseContext());
+                if(content.isEmpty()||name.isEmpty()){
+                    Toast.makeText(ModifyChapter.this,"Không bỏ trống nội dung",Toast.LENGTH_SHORT).show();
+                }else{
+                    db.addChapter(new Chapter(name,content),idStory);
+                    db.close();
+                    contentTxt.setEnabled(false);
+                    nameChapTxt.setEnabled(false);
+                    saveBtn.setEnabled(false);
+                    addBtn.setEnabled(true);
+                    delBtn.setEnabled(true);
+                    Toast.makeText(ModifyChapter.this,"Thêm chapter thành công",Toast.LENGTH_SHORT).show();
+
+                }
+
             }
         });
+
     }
-
-    public void setChapters(int index) {
-        if (chapterSpn.isEnabled() == true) {
-            chapterSpn.setEnabled(false);
-            contentTxt.setEnabled(true);
-            contentTxt.setText(chapterList.get(index).getContent());
-            nameChapTxt.setText(chapterList.get(index).getNameChapter());
-            nameChapTxt.setEnabled(true);
-            confBtn.setText("OK");
-
-        } else {
-            confBtn.setText("Chọn");
-            nameChapTxt.setEnabled(false);
-            contentTxt.setEnabled(false);
-            chapterSpn.setEnabled(true);
-            chapterList.set(index, new Chapter(nameChapTxt.getText().toString(), contentTxt.getText().toString()));
-        }
+    public void delChapter(){
+        DatabaseHandler db=new DatabaseHandler(getBaseContext());
+        db.deleteChapter(idStory);
+        db.close();
+        Toast.makeText(this,"Xóa thành công!",Toast.LENGTH_SHORT).show();
     }
+    public void modChapter(){
+        DatabaseHandler db=new DatabaseHandler(getBaseContext());
+        chapterList=db.getChapters(idStory);
+        ArrayList<Integer> list=new ArrayList<>();
+        for(int i=1;i<=chapterList.size();i++){ list.add(i); }
+        ArrayAdapter<Integer> adapter=new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_dropdown_item,list);
+        chapterSpn.setAdapter(adapter);
+        chapterSpn.setEnabled(true);
+        confBtn.setEnabled(true);
+        addBtn.setEnabled(false);
+        delBtn.setEnabled(false);
+        confBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveBtn.setEnabled(true);
+                chapterSpn.setEnabled(false);
+                confBtn.setEnabled(false);
+                nameChapTxt.setEnabled(true);
+                contentTxt.setEnabled(true);
+                saveBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String content=contentTxt.getText().toString();
+                        String name=nameChapTxt.getText().toString();
+                        Chapter chapter=chapterList.get(Integer.parseInt(chapterSpn.getSelectedItem().toString())-1);
+                        if(content.isEmpty()||name.isEmpty()){
+                            Toast.makeText(ModifyChapter.this,"Không bỏ trống!", Toast.LENGTH_SHORT).show();
+                        }else{
+                            chapter.setNameChapter(name);chapter.setContent(content);
+                            db.updateChapter(chapter);
+                            db.close();
+                            Toast.makeText(ModifyChapter.this,"Lưu thành công!", Toast.LENGTH_SHORT).show();
+                            contentTxt.setEnabled(false);
+                            nameChapTxt.setEnabled(false);
+                            saveBtn.setEnabled(false);
+                            addBtn.setEnabled(true);
+                            delBtn.setEnabled(true);
+                        }
+                    }
+                });
+            }
+        });
 
-    public void doSaveResult() {
-        Intent intent = new Intent();
-        for (Integer i = 0,z=0; i < chapterList.size(); i++) {
-            intent.putExtra(z.toString(), chapterList.get(i).getNameChapter());z++;
-            intent.putExtra(z.toString(), chapterList.get(i).getContent());z++;
-        }
-        intent.putExtra("chapterNumber", String.valueOf(chapterList.size()));
-        setResult(RESULT_OK, intent);
-        finish();
     }
 
 }
