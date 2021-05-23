@@ -9,6 +9,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.truyenol.R;
@@ -25,7 +27,9 @@ import com.example.truyenol.database.databaseHandler;
 import com.example.truyenol.model.user;
 
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 
@@ -35,8 +39,10 @@ public class MainDangKy extends AppCompatActivity {
     EditText editDangkyTK,editDangkyMK,editDangkyFull,editDangkyEmail;
     Button btndangky,btntrolai,btnanh;
     ImageView imgPhoto;
+    TextView linkAva;
     databaseHandler databaseHandler;
     int REQUEST_CODE_CAMERA = 123;
+    int REQUEST_CODE_FOLDER = 456;
 
 
     @Override
@@ -53,9 +59,9 @@ public class MainDangKy extends AppCompatActivity {
                 String password = editDangkyMK.getText().toString();
                 String email = editDangkyEmail.getText().toString();
                 String fullname = editDangkyFull.getText().toString();
-//                String avatar = imgPhoto.getI().toString();
+                String avatar = linkAva.getText().toString() ;
                 user user1= CreateUser();
-                if (username.equals("") || password.equals("") || email.equals("") || fullname.equals("") ){
+                if (username.equals("") || password.equals("") || email.equals("") || fullname.equals("")||avatar.equals("") ){
                     Log.e("Thông báo","Chưa nhập đầy đủ thông tin");
                 }
                 else {
@@ -65,11 +71,20 @@ public class MainDangKy extends AppCompatActivity {
                 }
             }
         });
-        btnanh.setOnClickListener(new View.OnClickListener() {
+        imgPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent chonanh = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(chonanh, REQUEST_CODE_CAMERA);
+            }
+        });
+        btnanh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent chonimg= new Intent(Intent.ACTION_PICK);
+                chonimg.setType("image/*");
+                doSetLinkAva();
+                startActivityForResult(chonimg,REQUEST_CODE_FOLDER);
             }
         });
         btntrolai.setOnClickListener(new View.OnClickListener() {
@@ -87,12 +102,18 @@ public class MainDangKy extends AppCompatActivity {
         String username = editDangkyTK.getText().toString();
         String password = editDangkyMK.getText().toString();
         String fullname = editDangkyFull.getText().toString();
+        String avatar = linkAva.getText().toString() ;
         String email = editDangkyEmail.getText().toString();
-//        String avatar = editDangkyAva.getText().toString();
         String position = "nhân viên";
 
-        user tk = new user(username,password,fullname,email,position);
+        user tk = new user(username,password,fullname,email,position,avatar);
         return tk;
+
+    }
+    private void doSetLinkAva(){
+        Intent setlink = new Intent(Intent.ACTION_GET_CONTENT);
+        setlink.setType("*/*");
+        startActivityForResult(setlink,1);
 
     }
 
@@ -101,6 +122,21 @@ public class MainDangKy extends AppCompatActivity {
         if (requestCode == REQUEST_CODE_CAMERA&& resultCode == RESULT_OK && data != null){
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             imgPhoto.setImageBitmap(bitmap);
+        }
+        if(requestCode==1&&resultCode==RESULT_OK){
+            String path= data.getData().getPath();
+            linkAva.setText(path);
+        }
+        if (requestCode == REQUEST_CODE_FOLDER&&resultCode == RESULT_OK&&data!=null){
+            Uri uri = data.getData();
+            try{
+                InputStream inputStream = getContentResolver().openInputStream(uri);
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                imgPhoto.setImageBitmap(bitmap);
+
+            }catch (FileNotFoundException e){
+                e.printStackTrace();
+            }
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -114,6 +150,7 @@ public class MainDangKy extends AppCompatActivity {
         btnanh = findViewById(R.id.btnchonanh);
         btndangky = findViewById(R.id.dangky);
         btntrolai = findViewById(R.id.trolai);
+        linkAva = findViewById(R.id.linkAvaTxt);
         editDangkyFull = findViewById(R.id.editfullname);
 
     }

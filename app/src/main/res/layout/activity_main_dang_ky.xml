@@ -145,7 +145,6 @@
             android:layout_marginRight="20dp"
             android:src="@drawable/ic_baseline_image_24"
             android:text="Chon ảnh" />
-
         <Button
             android:id="@+id/btnchonanh"
             style="@style/Widget.AppCompat.Button.Colored"
@@ -154,6 +153,12 @@
             android:layout_gravity="center"
             android:hint="Chọn ảnh"
             app:backgroundTint="#515151" />
+        <TextView
+            android:id="@+id/linkAvaTxt"
+            android:text="link"
+            android:visibility="invisible"
+            android:layout_width="10dp"
+            android:layout_height="10dp" />
     </LinearLayout>
 
 
