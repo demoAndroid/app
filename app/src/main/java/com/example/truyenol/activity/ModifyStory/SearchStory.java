@@ -55,10 +55,13 @@ public class SearchStory extends AppCompatActivity {
             Intent intent;
             if(act==1)
                 intent = new Intent(this,ModifyStory.class);
-            else
+            else if(act==2)
                 intent = new Intent(this,DeleteStory.class);
-            intent.putExtra("id",storyList.get(position).getId());
-            intent.putExtra("numberChapter",storyList.get(position).getNumberChapter());
+            else
+                intent = new Intent(this,ModifyChapter.class);;
+            intent.putExtra("id",String.valueOf(storyList.get(position).getId()));
+            intent.putExtra("numberChapter",String.valueOf(storyList.get(position).getNumberChapter()));
+            finish();
             startActivity(intent);
         }
         public void searchStories(){

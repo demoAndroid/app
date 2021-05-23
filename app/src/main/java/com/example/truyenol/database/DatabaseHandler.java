@@ -181,9 +181,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Cursor cursor=db.query(TABLE_STORY,new String[]{COLUMN_IDSTORY,COLUMN_NAMESTORY,COLUMN_TYPE,COLUMN_DESCRIPTION,COLUMN_AUTHOR,COLUMN_LINKIMG,COLUMN_NUMBERCHAPTER}
         ,COLUMN_NAMESTORY+" LIKE "+"?",new String[]{"%"+nameStory+"%"},null,null,null);
         if(cursor.moveToFirst())do{
-            stories.add(new Story(cursor.getInt(0)
+            int id= cursor.getInt(0);
+            stories.add(new Story(id
                     ,cursor.getString(1),cursor.getString(2)
-                    ,(cursor.getInt(6)>countChapters(cursor.getInt(0)))?true:false
+                    ,(cursor.getInt(6)>countChapters(id))?true:false
                     ,cursor.getString(3),cursor.getString(4)
                     ,0,cursor.getString(5),cursor.getInt(6)));
         }while(cursor.moveToNext());
@@ -195,6 +196,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Cursor cursor=db.query(TABLE_STORY,new String[]{COLUMN_IDSTORY,COLUMN_NAMESTORY,COLUMN_TYPE,COLUMN_DESCRIPTION,COLUMN_AUTHOR,COLUMN_LINKIMG,COLUMN_NUMBERCHAPTER}
                 ,COLUMN_IDSTORY+" =?",new String[]{String.valueOf(idStory)},null,null,null);
         if(cursor!=null){
+            cursor.moveToFirst();
             story=new Story(cursor.getInt(0)
                     ,cursor.getString(1),cursor.getString(2)
                     ,(cursor.getInt(6)>countChapters(cursor.getInt(0)))?true:false
