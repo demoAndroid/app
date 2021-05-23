@@ -32,18 +32,6 @@
         app:layout_constraintVertical_bias="0.138" />
 
     <TextView
-        android:id="@+id/chapterNumberTxt1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Số chương"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.059"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.801" />
-
-    <TextView
         android:id="@+id/txtdescription1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -80,7 +68,7 @@
         app:layout_constraintVertical_bias="0.682" />
 
     <TextView
-        android:id="@+id/linkTxt1"
+        android:id="@+id/linkTxt"
         android:layout_width="162dp"
         android:layout_height="25dp"
         android:text="Chọn file ảnh"
@@ -94,8 +82,8 @@
 
     <EditText
         android:id="@+id/typeTxt"
-        android:layout_width="208dp"
-        android:layout_height="25dp"
+        android:layout_width="212dp"
+        android:layout_height="48dp"
         android:textSize="8sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -107,7 +95,7 @@
     <EditText
         android:id="@+id/nameStoryTxt"
         android:layout_width="212dp"
-        android:layout_height="25dp"
+        android:layout_height="39dp"
         android:textSize="8sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -130,8 +118,8 @@
 
     <EditText
         android:id="@+id/authorTxt"
-        android:layout_width="209dp"
-        android:layout_height="22dp"
+        android:layout_width="208dp"
+        android:layout_height="46dp"
         android:textSize="8sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -141,17 +129,17 @@
         app:layout_constraintVertical_bias="0.234" />
 
     <Button
-        android:id="@+id/contentTxt"
-        android:layout_width="57dp"
-        android:layout_height="32dp"
+        android:id="@+id/saveBtn"
+        android:layout_width="75dp"
+        android:layout_height="39dp"
         android:text="Lưu"
         android:textSize="8sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.931"
+        app:layout_constraintHorizontal_bias="0.91"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.931" />
+        app:layout_constraintVertical_bias="0.953" />
 
     <Button
         android:id="@+id/linkAvaBtn"
@@ -166,27 +154,28 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.666" />
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="59dp"
-        android:layout_height="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.801" />
-
-    <Button
-        android:id="@+id/addChapterBtn"
-        android:layout_width="143dp"
-        android:layout_height="32dp"
-        android:text="Thêm ND chương"
+    <EditText
+        android:id="@+id/chapterNumberTxt"
+        android:layout_width="93dp"
+        android:layout_height="38dp"
+        android:text=""
         android:textSize="8sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.405"
+        app:layout_constraintHorizontal_bias="0.578"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.927" />
+        app:layout_constraintVertical_bias="0.851" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="129dp"
+        android:layout_height="35dp"
+        android:text="Số chương"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.056"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.848" />
 </androidx.constraintlayout.widget.ConstraintLayout>

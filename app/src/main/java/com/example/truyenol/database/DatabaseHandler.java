@@ -134,11 +134,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(COLUMN_NUMBERCHAPTER, story.getNumberChapter());
 
         db.insert(TABLE_STORY,null,values);
-        Cursor cursor=db.query(TABLE_STORY,new String[]{"MAX("+COLUMN_IDSTORY+")"},null,null,null,null,null);
-        if(cursor!=null)
-            cursor.moveToFirst();
-        addChapters(story.getChapters(),Integer.parseInt(cursor.getString(0)));
-        cursor.close();
+//        Cursor cursor=db.query(TABLE_STORY,new String[]{"MAX("+COLUMN_IDSTORY+")"},null,null,null,null,null);
+//        if(cursor!=null)
+//            cursor.moveToFirst();
+//        addChapters(story.getChapters(),Integer.parseInt(cursor.getString(0)));
+//        cursor.close();
         db.close();
     }
     public void addChapters(ArrayList<Chapter> chapters,int idStory){
@@ -153,4 +153,68 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
         db.close();
     }
+    public ArrayList<Chapter> getChapters(int idStory){
+        ArrayList<Chapter> chapters=new ArrayList<>();
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor=db.query(TABLE_CHAPTER,new String[]{COLUMN_NAMECHAPTER,COLUMN_CONTENT},
+                COLUMN_IDCHAPTER_STORY+"=?",new String[]{String.valueOf(idStory)},null,null,null);
+        if(cursor.moveToFirst()) do{
+            Chapter chapter=new Chapter(cursor.getString(0), cursor.getString(1));
+            chapters.add(chapter);
+        }while(cursor.moveToNext());
+        cursor.close();
+        return chapters;
+    }
+    public int countChapters(int idStory){
+        ArrayList<Chapter> chapters=new ArrayList<>();
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor=db.query(TABLE_CHAPTER,new String[]{COLUMN_NAMECHAPTER,COLUMN_CONTENT},
+                COLUMN_IDCHAPTER_STORY+"=?",new String[]{String.valueOf(idStory)},null,null,null);
+        int result=cursor.getColumnCount();
+        cursor.close();
+        return result;
+    }
+
+    public ArrayList<Story> getStoriesByName(String nameStory){
+        ArrayList<Story> stories=new ArrayList<>();
+        SQLiteDatabase db= this.getReadableDatabase();
+        Cursor cursor=db.query(TABLE_STORY,new String[]{COLUMN_IDSTORY,COLUMN_NAMESTORY,COLUMN_TYPE,COLUMN_DESCRIPTION,COLUMN_AUTHOR,COLUMN_LINKIMG,COLUMN_NUMBERCHAPTER}
+        ,COLUMN_NAMESTORY+" LIKE "+"?",new String[]{"%"+nameStory+"%"},null,null,null);
+        if(cursor.moveToFirst())do{
+            stories.add(new Story(cursor.getInt(0)
+                    ,cursor.getString(1),cursor.getString(2)
+                    ,(cursor.getInt(6)>countChapters(cursor.getInt(0)))?true:false
+                    ,cursor.getString(3),cursor.getString(4)
+                    ,0,cursor.getString(5),cursor.getInt(6)));
+        }while(cursor.moveToNext());
+        return stories;
+    }
+    public Story getStoriesById(int idStory){
+        Story story;
+        SQLiteDatabase db= this.getReadableDatabase();
+        Cursor cursor=db.query(TABLE_STORY,new String[]{COLUMN_IDSTORY,COLUMN_NAMESTORY,COLUMN_TYPE,COLUMN_DESCRIPTION,COLUMN_AUTHOR,COLUMN_LINKIMG,COLUMN_NUMBERCHAPTER}
+                ,COLUMN_IDSTORY+" =?",new String[]{String.valueOf(idStory)},null,null,null);
+        if(cursor!=null){
+            story=new Story(cursor.getInt(0)
+                    ,cursor.getString(1),cursor.getString(2)
+                    ,(cursor.getInt(6)>countChapters(cursor.getInt(0)))?true:false
+                    ,cursor.getString(3),cursor.getString(4)
+                    ,0,cursor.getString(5),cursor.getInt(6));
+            cursor.close();
+            return story;
+        }else return null;
+    }
+    public void updateStory(Story story){
+        SQLiteDatabase db= this.getWritableDatabase();
+        ContentValues values=new ContentValues();
+        values.put(COLUMN_NAMESTORY,story.getNameStory());
+        values.put(COLUMN_TYPE,story.getType());
+        values.put(COLUMN_DESCRIPTION,story.getDescription());
+        values.put(COLUMN_AUTHOR,story.getAuthor());
+        values.put(COLUMN_LINKIMG,story.getLinkImg());
+        values.put(COLUMN_NUMBERCHAPTER,story.getNumberChapter());
+        db.update(TABLE_STORY,values,COLUMN_IDSTORY+"=?",new String[]{String.valueOf(story.getId())});
+        db.close();
+    }
 }
+

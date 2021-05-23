@@ -9,7 +9,6 @@ public class Chapter {
     }
 
     public Chapter(String nameChapter, String content) {
-        this.id=3;
         this.nameChapter = nameChapter;
         this.content = content;
     }

@@ -55,11 +55,14 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void openModifyStoryActivity(){
-        Intent intent=new Intent(this,ModifyStory.class);
+        Intent intent=new Intent(this,SearchStory.class);
+        intent.putExtra("act","1");
         startActivity(intent);
     }
     public void openDeleteStoryActivity(){
-        Intent intent=new Intent(this,DeleteStory.class);
+        Intent intent=new Intent(this,SearchStory.class);
+
+        intent.putExtra("act","2");
         startActivity(intent);
     }
 

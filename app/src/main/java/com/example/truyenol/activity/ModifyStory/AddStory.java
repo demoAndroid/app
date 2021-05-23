@@ -22,12 +22,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class AddStory extends AppCompatActivity {
-    private EditText storyTxt,typeTxt,authorTxt,desTxt;
+    private EditText storyTxt,typeTxt,authorTxt,desTxt,chapNumberTxt;
     private TextView linkAvaTxt;
-    private Button linkAvaBtn,addChapterBtn,saveBtn;
-    private Spinner chapNumberSpn;
-    private ArrayList<Chapter> chapterList;
-    private int chapterNumber;
+    private Button linkAvaBtn,saveBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,20 +32,14 @@ public class AddStory extends AppCompatActivity {
         //Gán biến View
         setContentView(R.layout.activity_add_story);
         storyTxt=findViewById(R.id.nameStoryTxt);
+        chapNumberTxt=findViewById(R.id.chapterNumberTxt);
         typeTxt=findViewById(R.id.typeTxt);
         authorTxt=findViewById(R.id.authorTxt);
         desTxt=findViewById(R.id.desTxt);
         linkAvaTxt=findViewById(R.id.linkTxt1);
         linkAvaBtn=findViewById(R.id.linkAvaBtn);
-        addChapterBtn=findViewById(R.id.addChapterBtn);
         saveBtn=findViewById(R.id.saveBtn);
         //Set linkAvaBtn
-        addChapterBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                doAddChapter();
-            }
-        });
         linkAvaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,20 +60,15 @@ public class AddStory extends AppCompatActivity {
         startActivityForResult(intent,1);
 
     }
-    public void doAddChapter(){
-        Intent intent=new Intent(this,ModifyChapter.class);
-        startActivityForResult(intent,2);
-
-    }
     public void saveStory(){
         Story story=new Story();
         DatabaseHandler db=new DatabaseHandler(getBaseContext());
         story.setAuthor(authorTxt.getText().toString());
-        story.setChapters(chapterList);
+        story.setChapters(new ArrayList<>());
         story.setDescription(desTxt.getText().toString());
         story.setType(typeTxt.getText().toString());
         story.setLinkImg(linkAvaTxt.getText().toString());
-        story.setNumberChapter(chapterNumber);
+        story.setNumberChapter(Integer.parseInt(chapNumberTxt.getText().toString()));
         story.setNameStory(storyTxt.getText().toString());
         db.addStory(story);
         db.close();
@@ -97,15 +83,6 @@ public class AddStory extends AppCompatActivity {
         if(requestCode==1&&resultCode==RESULT_OK){
             String path= data.getData().getPath();
             linkAvaTxt.setText(path);
-        }
-        if(requestCode==2&&resultCode==RESULT_OK){
-            chapterList=new ArrayList<Chapter>();
-            chapterNumber =Integer.parseInt(data.getStringExtra("chapterNumber"));
-            for(Integer i=0;i<2*Integer.parseInt(data.getStringExtra("chapterNumber"));i++){
-                String nameChapter=data.getStringExtra(i.toString());i++;
-                String content=data.getStringExtra(i.toString());
-                chapterList.add(new Chapter(nameChapter,content));
-            }
         }
     }
 }

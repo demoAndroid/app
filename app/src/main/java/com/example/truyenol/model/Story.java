@@ -17,7 +17,7 @@ public class Story {
     public Story() {
     }
 
-    public Story(int id, String nameStory, String type, boolean status, String description, String author, float rating, String linkImg, int numberChapter, ArrayList<Chapter> chapters) {
+    public Story(int id, String nameStory, String type, boolean status, String description, String author, float rating, String linkImg, int numberChapter) {
         this.id = id;
         this.nameStory = nameStory;
         this.type = type;
@@ -27,7 +27,7 @@ public class Story {
         this.rating = rating;
         this.linkImg = linkImg;
         this.numberChapter = numberChapter;
-        this.chapters = chapters;
+        this.chapters = new ArrayList<>();
     }
 
     public int getId() {
