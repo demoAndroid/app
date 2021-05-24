@@ -6,35 +6,82 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".activity.HomeActivity">
-
-        <TextView
-            android:id="@+id/type1Txt"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="27dp"
-            android:fontFamily="serif"
-            android:text="Tiên hiệp"
-            android:textColor="#F44336"
-            android:textSize="20sp" />
-"
+            android:layout_height="50dp"
+            android:background="@color/black"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/logo"
+                            android:layout_marginLeft="50dp"/>
 
-        <GridView
-            android:id="@+id/gridView1"
-            android:layout_width="match_parent"
-            android:layout_height="295dp"
-            android:numColumns="4" />
+                        <Button
+                            android:id="@+id/searchBtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawableLeft="@drawable/ic_baseline_search_24"
+                            android:text="Button"
+                            app:backgroundTint="@color/black" />
+                </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
 
-        <TextView
-            android:id="@+id/type2Txt"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="27dp"
-            android:fontFamily="serif"
-            android:text="Ngôn tình"
-            android:textColor="#F44336"
-            android:textSize="20sp" />
+            android:layout_height="550dp">
 
-        <GridView
-            android:id="@+id/gridView2"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/type1Txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="27dp"
+                            android:fontFamily="serif"
+                            android:text="Tiên hiệp"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+
+                        <GridView
+                            android:id="@+id/gridView1"
+                            android:layout_width="match_parent"
+                            android:layout_height="295dp"
+                            android:numColumns="4" />
+
+                        <TextView
+                            android:id="@+id/type2Txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="27dp"
+                            android:fontFamily="serif"
+                            android:text="Ngôn tình"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+
+                        <GridView
+                            android:id="@+id/gridView2"
+                            android:layout_width="match_parent"
+                            android:layout_height="275dp"
+                            android:numColumns="4" />
+                </LinearLayout>
+        </ScrollView>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/botNavigation"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:numColumns="4"/>
+            android:layout_height="wrap_content"
+            app:itemTextColor="@color/white"
+            app:itemIconTint="@drawable/tab_color"
+            app:menu="@menu/menu">
+
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
+
 </LinearLayout>

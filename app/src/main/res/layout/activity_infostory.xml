@@ -6,7 +6,24 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".activity.InfoStoryActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/black"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/logo"
+                android:layout_marginLeft="50dp"/>
 
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -33,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="name"
-                    android:textColor="#DF1717"
+                    android:textColor="@color/white"
                     android:textSize="20sp" />
 
                 <TextView
@@ -51,14 +68,16 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="status"
-                    android:textColor="#805A5A"
+                    android:textColor="#D50000"
                     android:textSize="16sp" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/typeChip"
+                    style="@style/Theme.AppCompat.NoActionBar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Thể loại" />
+                    android:text="Thể loại"
+                    app:shapeAppearance="@style/Theme.AppCompat.NoActionBar" />
 
             </LinearLayout>
 
@@ -112,7 +131,7 @@
                             android:layout_width="160dp"
                             android:layout_height="match_parent"
                             android:text="Bình luận"
-                            android:textColor="@color/black" />
+                            android:textColor="@color/white" />
 
                         <Button
                             android:id="@+id/showCommentBtn"
@@ -120,7 +139,7 @@
                             android:layout_width="160dp"
                             android:layout_height="match_parent"
                             android:text="Xem bình luận"
-                            android:textColor="@color/black" />
+                            android:textColor="@color/white" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -137,7 +156,7 @@
                     android:layout_width="140dp"
                     android:layout_height="match_parent"
                     android:text="Trở về"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/white" />
 
                 <Button
                     android:id="@+id/readBtn"
@@ -145,7 +164,7 @@
                     android:layout_width="140dp"
                     android:layout_height="match_parent"
                     android:text="Đọc truyện"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/white" />
 
                 <Button
                     android:id="@+id/likeBtn"
@@ -153,7 +172,7 @@
                     android:layout_width="140dp"
                     android:layout_height="match_parent"
                     android:text="Yêu thích"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/white" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

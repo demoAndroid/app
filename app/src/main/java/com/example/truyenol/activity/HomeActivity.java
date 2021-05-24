@@ -1,6 +1,7 @@
 package com.example.truyenol.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -51,5 +52,7 @@ public class HomeActivity extends AppCompatActivity {
         showTienHiep();
         showNgonTinh();
     }
+
+
 
 }
