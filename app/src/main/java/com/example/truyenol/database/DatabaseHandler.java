@@ -224,9 +224,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.update(TABLE_STORY,values,COLUMN_IDSTORY+"=?",new String[]{String.valueOf(story.getId())});
         db.close();
     }
-    public void deleteChapter(int idStory){
+    public void deleteChapter(int idChapter){
         SQLiteDatabase db=this.getWritableDatabase();
-        db.delete(TABLE_CHAPTER,COLUMN_IDCHAPTER_STORY+"=?"+" AND "+"MAX("+COLUMN_IDCHAPTER+") ",new String[]{String.valueOf(idStory)});
+        db.delete(TABLE_CHAPTER,COLUMN_IDCHAPTER+"=?",new String[]{String.valueOf(idChapter)});
         db.close();
     }
 }

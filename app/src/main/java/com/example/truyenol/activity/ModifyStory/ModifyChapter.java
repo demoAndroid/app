@@ -1,8 +1,10 @@
 package com.example.truyenol.activity.ModifyStory;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -46,7 +48,7 @@ public class ModifyChapter extends AppCompatActivity {
         delBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                delChapter();
             }
         });
         modBtn.setOnClickListener(new View.OnClickListener() {
@@ -105,10 +107,25 @@ public class ModifyChapter extends AppCompatActivity {
 
     }
     public void delChapter(){
-        DatabaseHandler db=new DatabaseHandler(getBaseContext());
-        db.deleteChapter(idStory);
-        db.close();
-        Toast.makeText(this,"Xóa thành công!",Toast.LENGTH_SHORT).show();
+        new AlertDialog.Builder(this)
+                .setTitle("Xóa chapter")
+                .setMessage("Bạn có chắc muốn xóa chapter?")
+
+                // Specifying a listener allows you to take an action before dismissing the dialog.
+                // The dialog is automatically dismissed when a dialog button is clicked.
+                .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        DatabaseHandler db=new DatabaseHandler(getBaseContext());
+                        db.deleteChapter(chapterList.get(chapterList.size()-1).getId());
+                        db.close();
+                        Toast.makeText(ModifyChapter.this,"Xóa thành công!",Toast.LENGTH_SHORT).show();
+                    }
+                })
+
+                // A null listener allows the button to dismiss the dialog and take no further action.
+                .setNegativeButton("no", null)
+                .show();
+
     }
     public void modChapter(){
         DatabaseHandler db=new DatabaseHandler(getBaseContext());
@@ -129,12 +146,14 @@ public class ModifyChapter extends AppCompatActivity {
                 confBtn.setEnabled(false);
                 nameChapTxt.setEnabled(true);
                 contentTxt.setEnabled(true);
+                Chapter chapter=chapterList.get(Integer.parseInt(chapterSpn.getSelectedItem().toString())-1);
+                nameChapTxt.setText(chapter.getNameChapter());
+                contentTxt.setText(chapter.getContent());
                 saveBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         String content=contentTxt.getText().toString();
                         String name=nameChapTxt.getText().toString();
-                        Chapter chapter=chapterList.get(Integer.parseInt(chapterSpn.getSelectedItem().toString())-1);
                         if(content.isEmpty()||name.isEmpty()){
                             Toast.makeText(ModifyChapter.this,"Không bỏ trống!", Toast.LENGTH_SHORT).show();
                         }else{
