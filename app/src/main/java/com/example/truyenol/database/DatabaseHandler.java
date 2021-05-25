@@ -207,6 +207,29 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
         return listTh;
     }
+    public ArrayList<Story> getTopStory(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<Story> listTh = new ArrayList<>();
+        Cursor cursor =  db.rawQuery( "select * from " + TABLE_STORY + " ORDER BY rating DESC LIMIT 20" , null );
+        if (cursor.moveToFirst()) {
+            do {
+                Story story = new Story();
+                story.setId(cursor.getInt(0));
+                story.setNameStory(cursor.getString(1));
+                story.setType(cursor.getString(2));
+                story.setStatus(cursor.getString(3));
+                story.setDescription(cursor.getString(4));
+                story.setAuthor(cursor.getString(5));
+                story.setLinkImg(cursor.getString(6));
+                story.setNumberChapter(cursor.getString(7));
+                story.setRating(cursor.getString(8));
+                listTh.add(story);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return listTh;
+    }
 
     public Story getStoryById(int id){
         SQLiteDatabase db = this.getReadableDatabase();
