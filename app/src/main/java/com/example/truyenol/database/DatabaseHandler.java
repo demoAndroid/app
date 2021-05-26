@@ -393,4 +393,23 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
         return listChapter;
     }
+    public Cursor getData(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery(  "SELECT * FROM "+TABLE_USER,null );
+        return res;
+    }
+    public  void  addTaikhoan(User user){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_USERNAME,user.getUsername());
+        values.put(COLUMN_PASSWORD,user.getPassword());
+        values.put(COLUMN_FULLNAME,user.getFullName());
+        values.put(COLUMN_EMAIL,user.getEmail());
+        values.put(COLUMN_LINKAVA,user.getLinkAva());
+        values.put(COLUMN_POSITION,user.getPosition());
+        db.insert(TABLE_USER,null,values);
+        db.close();
+        Log.e("ADD TK","TC");
+
+    }
 }
