@@ -103,7 +103,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 "FOREIGN KEY (" + COLUMN_IDUSER_COMMENT + ") REFERENCES " +
                 TABLE_USER + "(" +COLUMN_ID + "), "+
                 "FOREIGN KEY (" + COLUMN_IDSTORY_COMMENT + ") REFERENCES " +
-                TABLE_USER + "(" +COLUMN_IDSTORY + "))";
+                TABLE_STORY + "(" +COLUMN_IDSTORY + "))";
 
         String sqlQuery4 = "CREATE TABLE " + TABLE_CHAPTER +"( " +
                 COLUMN_IDCHAPTER +" INTEGER primary key autoincrement, " +
@@ -111,7 +111,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 COLUMN_NAMECHAPTER + " TEXT, " +
                 COLUMN_CONTENT + " TEXT, " +
                 "FOREIGN KEY (" + COLUMN_IDCHAPTER_STORY + ") REFERENCES " +
-                TABLE_USER + "(" +COLUMN_IDSTORY + "))";
+                TABLE_STORY + "(" +COLUMN_IDSTORY + "))";
 
         db.execSQL(sqlQuery1);
         db.execSQL(sqlQuery2);
