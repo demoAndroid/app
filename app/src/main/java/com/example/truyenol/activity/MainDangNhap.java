@@ -51,17 +51,20 @@ public class MainDangNhap extends AppCompatActivity {
 
                     //nếu tài khoản và mật khẩu nhập tư bàn phím khớp với ở database
                     if (datausername.equals(tentaikhoan)&&datapassword.equals(matkhau)){
-                        int phanquyen = cursor.getInt(6);
+                        String phanquyen = cursor.getString(6);
+                        String linkAva = cursor.getString(5);
                         int idd = cursor.getInt(0);
                         String email = cursor.getString(4);
                         String fullname = cursor.getString(3);
                         Intent intent = new Intent(MainDangNhap.this, HomeActivity.class);
-
+                        Bundle bundle = new Bundle();
                         // gửi dữ liệu qua mainactice
-                        intent.putExtra("position",phanquyen);
-                        intent.putExtra("idd",idd);
-                        intent.putExtra("email",email);
-                        intent.putExtra("fullname",fullname);
+                        bundle.putString("linkAva",linkAva);
+                        bundle.putInt("idUser",idd);
+                        bundle.putString("fullname",fullname);
+                        bundle.putString("email",email);
+                        bundle.putString("position",phanquyen);
+                        intent.putExtras(bundle);
                         startActivity(intent);
                         if (tentaikhoan.equals("") || matkhau.equals("")){
                             Log.e("Thiếu thông tin", "Thất bại");

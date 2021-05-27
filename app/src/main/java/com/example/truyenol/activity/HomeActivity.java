@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -42,6 +43,10 @@ public class HomeActivity extends AppCompatActivity {
         BottomNavigationView bottomNav = findViewById(R.id.botNavigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
         bottomNav.setSelectedItemId(R.id.navigation_home);
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        AccountFragment accountFragment = new AccountFragment();
+        accountFragment.setArguments(bundle);
     }
     private BottomNavigationView.OnNavigationItemSelectedListener navListener=
             new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -57,6 +62,9 @@ public class HomeActivity extends AppCompatActivity {
                             break;
                         case R.id.navigation_user:
                             fragment = new AccountFragment();
+                            Intent intent = getIntent();
+                            Bundle bundle = intent.getExtras();
+                            fragment.setArguments(bundle);
                             break;
                     }
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_selected,
