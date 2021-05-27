@@ -8,8 +8,7 @@ public class Chapter {
     public Chapter() {
     }
 
-    public Chapter(int id, String nameChapter, String content) {
-        this.id = id;
+    public Chapter(String nameChapter, String content) {
         this.nameChapter = nameChapter;
         this.content = content;
     }

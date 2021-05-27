@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
-
 import com.example.truyenol.R;
 import com.example.truyenol.adapter.StoryAdapter;
 import com.example.truyenol.model.Chapter;
@@ -40,10 +39,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String COLUMN_IDSTORY = "idStory";
     private static final String COLUMN_NAMESTORY = "nameStory";
     private static final String COLUMN_TYPE = "type";
-    private static final String COLUMN_STATUS = "status";
     private static final String COLUMN_DESCRIPTION = "description";
     private static final String COLUMN_AUTHOR = "author";
-    private static final String COLUMN_RATING = "rating";
     private static final String COLUMN_LINKIMG = "linkImg";
     private static final String COLUMN_NUMBERCHAPTER = "numberChapter";
 
@@ -75,7 +72,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sqlQuery1 = "CREATE TABLE " + TABLE_USER +"( " +
-                COLUMN_ID +" integer primary key autoincrement, " +
+                COLUMN_ID +" INTEGER PRIMARY KEY autoincrement, " +
                 COLUMN_USERNAME + " TEXT, " +
                 COLUMN_PASSWORD + " TEXT, " +
                 COLUMN_FULLNAME + " TEXT, " +
@@ -84,15 +81,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 COLUMN_POSITION + " TEXT)";
 
         String sqlQuery2 = "CREATE TABLE " + TABLE_STORY +"( " +
-                COLUMN_IDSTORY +" integer primary key autoincrement, " +
+
+                COLUMN_IDSTORY +" INTEGER PRIMARY KEY autoincrement, " +
                 COLUMN_NAMESTORY + " TEXT, " +
                 COLUMN_TYPE + " TEXT, " +
-                COLUMN_STATUS + " TEXT, " +
                 COLUMN_DESCRIPTION + " TEXT, " +
                 COLUMN_AUTHOR + " TEXT, " +
                 COLUMN_LINKIMG + " TEXT, " +
-                COLUMN_NUMBERCHAPTER + " TEXT, " +
-                COLUMN_RATING + " TEXT)";
+                COLUMN_NUMBERCHAPTER + " TEXT)";
 
         String sqlQuery3 = "CREATE TABLE " + TABLE_COMMENT +"( " +
                 COLUMN_IDCOMMENT +" integer primary key autoincrement, " +
@@ -135,15 +131,106 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(COLUMN_NAMESTORY, story.getNameStory());
         values.put(COLUMN_TYPE, story.getType());
-        values.put(COLUMN_STATUS, story.getStatus());
         values.put(COLUMN_DESCRIPTION, story.getDescription());
         values.put(COLUMN_AUTHOR, story.getAuthor());
-        values.put(COLUMN_RATING, story.getRating());
         values.put(COLUMN_LINKIMG, story.getLinkImg());
         values.put(COLUMN_NUMBERCHAPTER, story.getNumberChapter());
 
         db.insert(TABLE_STORY,null,values);
+//        Cursor cursor=db.query(TABLE_STORY,new String[]{"MAX("+COLUMN_IDSTORY+")"},null,null,null,null,null);
+//        if(cursor!=null)
+//            cursor.moveToFirst();
+//        addChapters(story.getChapters(),Integer.parseInt(cursor.getString(0)));
+//        cursor.close();
         db.close();
+    }
+    public void addChapter(Chapter chapter,int idStory){
+        SQLiteDatabase db= this.getWritableDatabase();
+        ContentValues values=new ContentValues();
+        db.delete(TABLE_CHAPTER,COLUMN_IDCHAPTER_STORY+"=?",new String[]{String.valueOf(idStory)});
+            values.put(COLUMN_IDCHAPTER_STORY, idStory);
+            values.put(COLUMN_NAMECHAPTER,chapter.getNameChapter());
+            values.put(COLUMN_CONTENT, chapter.getContent());
+            db.insert(TABLE_CHAPTER,null,values);
+        db.close();
+    }
+    public ArrayList<Chapter> getChapters(int idStory){
+        ArrayList<Chapter> chapters=new ArrayList<>();
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor=db.query(TABLE_CHAPTER,new String[]{COLUMN_IDCHAPTER_STORY,COLUMN_NAMECHAPTER,COLUMN_CONTENT},
+                COLUMN_IDCHAPTER_STORY+"=?",new String[]{String.valueOf(idStory)},null,null,null);
+        if(cursor.moveToFirst()) do{
+            Chapter chapter=new Chapter(cursor.getString(1), cursor.getString(2));
+            chapter.setId(cursor.getInt(0));
+            chapters.add(chapter);
+        }while(cursor.moveToNext());
+        cursor.close();
+        return chapters;
+    }
+    public int countChapters(int idStory){
+        ArrayList<Chapter> chapters=new ArrayList<>();
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor=db.query(TABLE_CHAPTER,new String[]{COLUMN_NAMECHAPTER,COLUMN_CONTENT},
+                COLUMN_IDCHAPTER_STORY+"=?",new String[]{String.valueOf(idStory)},null,null,null);
+        int result=cursor.getColumnCount();
+        cursor.close();
+        return result;
+    }
+    public void updateChapter(Chapter chapter){
+        SQLiteDatabase db= this.getWritableDatabase();
+        ContentValues value=new ContentValues();
+        value.put(COLUMN_NAMECHAPTER,chapter.getNameChapter());
+        value.put(COLUMN_CONTENT,chapter.getContent());
+        db.update(TABLE_CHAPTER,value,COLUMN_IDCHAPTER+"=?",new String[]{String.valueOf(chapter.getId())});
+        db.close();
+    }
+    public ArrayList<Story> getStoriesByName(String nameStory){
+        ArrayList<Story> stories=new ArrayList<>();
+        SQLiteDatabase db= this.getReadableDatabase();
+        Cursor cursor=db.query(TABLE_STORY,new String[]{COLUMN_IDSTORY,COLUMN_NAMESTORY,COLUMN_TYPE,COLUMN_DESCRIPTION,COLUMN_AUTHOR,COLUMN_LINKIMG,COLUMN_NUMBERCHAPTER}
+        ,COLUMN_NAMESTORY+" LIKE "+"?",new String[]{"%"+nameStory+"%"},null,null,null);
+        if(cursor.moveToFirst())do{
+            int id= cursor.getInt(0);
+            stories.add(new Story(id
+                    ,cursor.getString(1),cursor.getString(2)
+                    ,(cursor.getInt(6)>countChapters(id))?true:false
+                    ,cursor.getString(3),cursor.getString(4)
+                    ,0,cursor.getString(5),cursor.getInt(6)));
+        }while(cursor.moveToNext());
+        return stories;
+    }
+    public Story getStoriesById(int idStory){
+        Story story;
+        SQLiteDatabase db= this.getReadableDatabase();
+        Cursor cursor=db.query(TABLE_STORY,new String[]{COLUMN_IDSTORY,COLUMN_NAMESTORY,COLUMN_TYPE,COLUMN_DESCRIPTION,COLUMN_AUTHOR,COLUMN_LINKIMG,COLUMN_NUMBERCHAPTER}
+                ,COLUMN_IDSTORY+" =?",new String[]{String.valueOf(idStory)},null,null,null);
+        if(cursor!=null){
+            cursor.moveToFirst();
+            story=new Story(cursor.getInt(0)
+                    ,cursor.getString(1),cursor.getString(2)
+                    ,(cursor.getInt(6)>countChapters(cursor.getInt(0)))?true:false
+                    ,cursor.getString(3),cursor.getString(4)
+                    ,0,cursor.getString(5),cursor.getInt(6));
+            cursor.close();
+            return story;
+        }else return null;
+    }
+    public void updateStory(Story story){
+        SQLiteDatabase db= this.getWritableDatabase();
+        ContentValues values=new ContentValues();
+        values.put(COLUMN_NAMESTORY,story.getNameStory());
+        values.put(COLUMN_TYPE,story.getType());
+        values.put(COLUMN_DESCRIPTION,story.getDescription());
+        values.put(COLUMN_AUTHOR,story.getAuthor());
+        values.put(COLUMN_LINKIMG,story.getLinkImg());
+        values.put(COLUMN_NUMBERCHAPTER,story.getNumberChapter());
+        db.update(TABLE_STORY,values,COLUMN_IDSTORY+"=?",new String[]{String.valueOf(story.getId())});
+        db.close();
+    }
+    public void deleteChapter(int idChapter){
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.delete(TABLE_CHAPTER,COLUMN_IDCHAPTER+"=?",new String[]{String.valueOf(idChapter)});
+        db.close();  
     }
     public void addStoryTest(){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -410,6 +497,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.insert(TABLE_USER,null,values);
         db.close();
         Log.e("ADD TK","TC");
-
     }
 }
+
