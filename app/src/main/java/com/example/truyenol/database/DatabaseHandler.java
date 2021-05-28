@@ -144,11 +144,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void addChapter(Chapter chapter,int idStory){
         SQLiteDatabase db= this.getWritableDatabase();
         ContentValues values=new ContentValues();
-        db.delete(TABLE_CHAPTER,COLUMN_IDCHAPTER_STORY+"=?",new String[]{String.valueOf(idStory)});
-            values.put(COLUMN_IDCHAPTER_STORY, idStory);
-            values.put(COLUMN_NAMECHAPTER,chapter.getNameChapter());
-            values.put(COLUMN_CONTENT, chapter.getContent());
-            db.insert(TABLE_CHAPTER,null,values);
+        values.put(COLUMN_IDCHAPTER_STORY, idStory);
+        values.put(COLUMN_NAMECHAPTER,chapter.getNameChapter());
+        values.put(COLUMN_CONTENT, chapter.getContent());
+        db.insert(TABLE_CHAPTER,null,values);
         db.close();
     }
     public ArrayList<Chapter> getChapters(int idStory){

@@ -55,8 +55,8 @@ public class AddStory extends AppCompatActivity {
     }
 
     public void doSetLinkAva(){
-        Intent intent=new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("*/*");
+        Intent intent=new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.setType("image/*");
         startActivityForResult(intent,1);
 
     }
@@ -81,7 +81,7 @@ public class AddStory extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==1&&resultCode==RESULT_OK){
-            String path= data.getData().getPath();
+            String path= data.getData().toString();
             linkAvaTxt.setText(path);
         }
     }
