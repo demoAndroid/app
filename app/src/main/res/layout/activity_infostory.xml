@@ -1,185 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".activity.InfoStoryActivity">
-
-    <ImageView
-        android:id="@+id/storyImg"
-        android:layout_width="150dp"
-        android:layout_height="200dp"
-        android:src="@drawable/image1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.061"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/nameStoryTxt"
-        android:layout_width="150dp"
-        android:layout_height="30dp"
-        android:text="Tên truyện"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.693"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.027" />
-
-    <TextView
-        android:id="@+id/authorTxt"
-        android:layout_width="150dp"
-        android:layout_height="25dp"
-        android:text="Tác giả"
-        android:textColor="#2196F3"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.693"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.119" />
-
-    <TextView
-        android:id="@+id/statusTxt"
-        android:layout_width="150dp"
-        android:layout_height="25dp"
-        android:text="Trạng thái"
-        android:textColor="#F44336"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.693"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.204" />
-
-    <com.google.android.material.chip.Chip
-        android:id="@+id/typeTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Thể loại"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.538"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.273"
-        tools:text="Thể loại" />
-
-    <TextView
-        android:id="@+id/contentTxt"
-        android:layout_width="380dp"
-        android:layout_height="wrap_content"
-        android:text="Content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.428" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="100dp"
-        android:layout_height="120dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.056"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.616"
-        android:src="@drawable/image5"/>
-
-    <EditText
-        android:id="@+id/commentTxt"
-        android:layout_width="250dp"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:ems="10"
-        android:hint="Thêm bình luận"
-        android:inputType="text|textEmailAddress"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.807"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.537" />
+        android:background="@color/black"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/logo"
+                android:layout_marginLeft="50dp"/>
 
-    <Button
-        android:id="@+id/commentBtn"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:text="Bình luận"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.423"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.659" />
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/showComBtn"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:text="Xem Bình luận"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.887"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.658" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/backBtn"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="130dp"
-        android:layout_height="80dp"
-        android:text="Trở về"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.988" />
+            <ImageView
+                android:id="@+id/storyInfoImg"
+                android:layout_width="120dp"
+                android:layout_height="150dp" />
 
-    <Button
-        android:id="@+id/readBtn"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="150dp"
-        android:layout_height="80dp"
-        android:onClick="showChapter"
-        android:text="Đọc truyện"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.988" />
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_height="150dp"
+                android:orientation="vertical">
 
-    <Button
-        android:id="@+id/likeBtn"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="130dp"
-        android:layout_height="80dp"
-        android:text="Yêu thích"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.996"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.986" />
+                <TextView
+                    android:id="@+id/nameTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="name"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/authorTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="author"
+                    android:textColor="#1289BF"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/statusTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="status"
+                    android:textColor="#D50000"
+                    android:textSize="16sp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/typeChip"
+                    style="@style/Theme.AppCompat.NoActionBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Thể loại"
+                    app:shapeAppearance="@style/Theme.AppCompat.NoActionBar" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bot"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ScrollView
+                android:id="@+id/scrollView1"
+                android:layout_width="match_parent"
+                android:layout_height="300dp">
+
+                <TextView
+                    android:id="@+id/descripTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+            </ScrollView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/image5" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/commentTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Thêm bình luận" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <Button
+                            android:id="@+id/commentBtn"
+                            style="?android:attr/borderlessButtonStyle"
+                            android:layout_width="160dp"
+                            android:layout_height="match_parent"
+                            android:text="Bình luận"
+                            android:textColor="@color/white" />
+
+                        <Button
+                            android:id="@+id/showCommentBtn"
+                            style="?android:attr/borderlessButtonStyle"
+                            android:layout_width="160dp"
+                            android:layout_height="match_parent"
+                            android:text="Xem bình luận"
+                            android:textColor="@color/white" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/buttonBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <Button
+                    android:id="@+id/backBtn"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="140dp"
+                    android:layout_height="match_parent"
+                    android:text="Trở về"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/readBtn"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="140dp"
+                    android:layout_height="match_parent"
+                    android:text="Đọc truyện"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/likeBtn"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="140dp"
+                    android:layout_height="match_parent"
+                    android:text="Yêu thích"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

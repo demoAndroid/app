@@ -9,6 +9,7 @@ public class User {
     private String linkAva;
     private String position;
 
+
     public User() {
     }
 
