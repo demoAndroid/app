@@ -62,7 +62,6 @@ public class RankingAdapter extends BaseAdapter {
                 bundle.putString("linkImg",list.get(position).getLinkImg());
                 bundle.putString("nameStory",list.get(position).getNameStory());
                 bundle.putString("author",list.get(position).getAuthor());
-                bundle.putString("status",list.get(position).getStatus());
                 bundle.putString("type",list.get(position).getType());
                 bundle.putString("description",list.get(position).getDescription());
                 intent.putExtras(bundle);

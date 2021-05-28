@@ -2,7 +2,6 @@ package com.example.truyenol.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,10 +15,13 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.truyenol.R;
+import com.example.truyenol.activity.ModifyStory.MainActivity;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+
+import static android.view.View.GONE;
 
 public class AccountFragment extends Fragment {
     int idUser;
@@ -39,11 +41,24 @@ public class AccountFragment extends Fragment {
             linkAva = bundle.getString("linkAva");
         }
         ImageView avaUser = (ImageView)view.findViewById(R.id.avaUser);
-        Glide.with(getContext()).load("/document/image:32").into(avaUser);
+        Glide.with(getContext()).load(new File(linkAva)).into(avaUser);
         TextView nameUser = (TextView)view.findViewById(R.id.nameUser);
         nameUser.setText(fullname);
         TextView roleTxt = (TextView)view.findViewById(R.id.roleTxt);
         roleTxt.setText(position);
+
+        TextView userInfo = (TextView) view.findViewById(R.id.userInfo);
+        TextView editStory = (TextView) view.findViewById(R.id.editStory);
+        TextView backTxt = (TextView) view.findViewById(R.id.backTxt);
+        if(position.equals("Admin")) editStory.setVisibility(View.VISIBLE);
+        else editStory.setVisibility(GONE);
+        editStory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 }

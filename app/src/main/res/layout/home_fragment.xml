@@ -28,12 +28,13 @@
 
                 <Button
                     android:id="@+id/searchBtn"
-                    android:backgroundTint="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:drawableLeft="@drawable/ic_baseline_search_24"
-                    android:text="Button" />
+                    android:paddingLeft="20dp"
+                    android:background="@drawable/buttom_style"
+                    android:backgroundTint="@color/black"
+                    android:drawableLeft="@drawable/ic_baseline_search_24" />
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
 
@@ -59,7 +60,7 @@
                     android:id="@+id/gridView1"
                     android:layout_width="match_parent"
                     android:layout_height="295dp"
-                    android:numColumns="4" />
+                    android:numColumns="5" />
 
                 <TextView
                     android:id="@+id/type2Txt"
@@ -74,7 +75,7 @@
                     android:id="@+id/gridView2"
                     android:layout_width="match_parent"
                     android:layout_height="275dp"
-                    android:numColumns="4" />
+                    android:numColumns="5" />
             </LinearLayout>
         </ScrollView>
 

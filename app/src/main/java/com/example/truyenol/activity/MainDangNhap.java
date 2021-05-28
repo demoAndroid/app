@@ -29,7 +29,6 @@ public class MainDangNhap extends AppCompatActivity {
         Login();
         //đối tượng database
         databaseHandler = new DatabaseHandler(this);
-
         //tạo sự kiện click button chuyển sang trang đăng ký vs intent
         dangky.setOnClickListener(new View.OnClickListener() {
             @Override

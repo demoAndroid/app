@@ -17,7 +17,7 @@ public class Story {
     public Story() {
     }
 
-    public Story(int id, String nameStory, String type, boolean status, String description, String author, float rating, String linkImg, int numberChapter) {
+    public Story(int id, String nameStory, String type, boolean status, String description, String author, String linkImg, int numberChapter) {
         this.id = id;
         this.nameStory = nameStory;
         this.type = type;
@@ -26,7 +26,6 @@ public class Story {
         this.author = author;
         this.linkImg = linkImg;
         this.numberChapter = numberChapter;
-        this.chapters = new ArrayList<>();
     }
 
     @Override
@@ -92,11 +91,11 @@ public class Story {
         this.author = author;
     }
 
-    public String getRating() {
+    public float getRating() {
         return rating;
     }
 
-    public void setRating(String rating) {
+    public void setRating(float rating) {
         this.rating = rating;
     }
 

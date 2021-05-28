@@ -28,14 +28,16 @@ public class InfoStoryActivity extends AppCompatActivity {
         TextView descripTxt = (TextView)findViewById(R.id.descripTxt);
         Button readBtn = (Button)findViewById(R.id.readBtn);
         Button backBtn = (Button)findViewById(R.id.backBtn);
-        Chip typeChip = (Chip)findViewById(R.id.typeChip);
+        Button type = (Button)findViewById(R.id.type);
         if(bundle!=null){
             String linkImg = bundle.getString("linkImg");
             Glide.with(getApplicationContext()).load(linkImg).into(imgStory);
-            nameStoryTxt.setText(getIntent().getStringExtra("nameStory"));
+            nameStoryTxt.setText(bundle.getString("nameStory"));
             authorTxt.setText(bundle.getString("author"));
-            statusTxt.setText(bundle.getString("status"));
-            typeChip.setText(bundle.getString("type"));
+            if(bundle.getBoolean("status")==true)
+                statusTxt.setText("Còn tiếp");
+            else statusTxt.setText("Hoàn thành");
+            type.setText(bundle.getString("type"));
             descripTxt.setText(bundle.getString("description"));
         }
 
