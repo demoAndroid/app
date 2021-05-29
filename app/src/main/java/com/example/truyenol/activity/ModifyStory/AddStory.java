@@ -1,7 +1,10 @@
 package com.example.truyenol.activity.ModifyStory;
 
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -11,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.truyenol.R;
@@ -18,6 +22,10 @@ import com.example.truyenol.database.DatabaseHandler;
 import com.example.truyenol.model.Chapter;
 import com.example.truyenol.model.Story;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -31,6 +39,7 @@ public class AddStory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //Gán biến View
         setContentView(R.layout.activity_add_story);
+
         storyTxt=findViewById(R.id.nameStoryTxt);
         chapNumberTxt=findViewById(R.id.chapterNumberTxt);
         typeTxt=findViewById(R.id.typeTxt);
@@ -53,11 +62,13 @@ public class AddStory extends AppCompatActivity {
             }
         });
     }
-
     public void doSetLinkAva(){
-        Intent intent=new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("*/*");
-        startActivityForResult(intent,1);
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.setType("image/*");
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION
+                | Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+                | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+        startActivityForResult(intent, 1);
 
     }
     public void saveStory(){
@@ -77,12 +88,14 @@ public class AddStory extends AppCompatActivity {
         finish();
         startActivity(intent);
     }
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==1&&resultCode==RESULT_OK){
-            String path= data.getData().getPath();
-            linkAvaTxt.setText(path);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            Uri uri = data.getData();
+            getContentResolver().takePersistableUriPermission(data.getData(), Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            linkAvaTxt.setText(uri.toString());
         }
     }
 }

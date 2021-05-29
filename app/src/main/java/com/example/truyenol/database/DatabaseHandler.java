@@ -148,7 +148,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void addChapter(Chapter chapter,int idStory){
         SQLiteDatabase db= this.getWritableDatabase();
         ContentValues values=new ContentValues();
-        db.delete(TABLE_CHAPTER,COLUMN_IDCHAPTER_STORY+"=?",new String[]{String.valueOf(idStory)});
         values.put(COLUMN_IDCHAPTER_STORY, idStory);
         values.put(COLUMN_NAMECHAPTER,chapter.getNameChapter());
         values.put(COLUMN_CONTENT, chapter.getContent());
@@ -228,10 +227,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.update(TABLE_STORY,values,COLUMN_IDSTORY+"=?",new String[]{String.valueOf(story.getId())});
         db.close();
     }
-    public void deleteChapter(int idChapter){
+    public int deleteChapter(int idChapter){
         SQLiteDatabase db=this.getWritableDatabase();
-        db.delete(TABLE_CHAPTER,COLUMN_IDCHAPTER+"=?",new String[]{String.valueOf(idChapter)});
+        int result=db.delete(TABLE_CHAPTER,COLUMN_IDCHAPTER+"=?",new String[]{String.valueOf(idChapter)});
         db.close();
+        return result;
     }
     public void addStoryTest(){
         SQLiteDatabase db = this.getWritableDatabase();
