@@ -83,7 +83,7 @@ public class MainDangKy extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent chonimg= new Intent(Intent.ACTION_PICK);
-                chonimg.setType("image/*");
+                chonimg.setType("*/*");
                 doSetLinkAva();
                 startActivityForResult(chonimg,REQUEST_CODE_FOLDER);
             }
@@ -132,6 +132,7 @@ public class MainDangKy extends AppCompatActivity {
             String path= data.getData().getPath();
             linkAva.setText(path);
         }
+
         if (requestCode == REQUEST_CODE_FOLDER&&resultCode == RESULT_OK&&data!=null){
             Uri uri = data.getData();
             try{
