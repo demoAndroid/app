@@ -63,11 +63,11 @@ public class MainDangKy extends AppCompatActivity {
                 String avatar = linkAva.getText().toString() ;
                 User user1= CreateUser();
                 if (username.equals("") || password.equals("") || email.equals("") || fullname.equals("")||avatar.equals("") ){
-                    Log.e("Thông báo","Ch?a nh?p ??y ?? thông tin");
+                    Log.e("Thông báo","Chưa nhập đầy đủ thông tin");
                 }
                 else {
                     databaseHandler.addTaikhoan(user1);
-                    Toast.makeText(MainDangKy.this,"??ng ký thành công",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainDangKy.this,"Đăng ký thành công",Toast.LENGTH_SHORT).show();
 
                 }
             }
