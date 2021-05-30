@@ -69,6 +69,12 @@
             android:layout_height="50dp"
             android:text="Chỉnh sửa truyện"
             android:textSize="24sp" />
+        <TextView
+            android:id="@+id/btncovid"
+            android:layout_width="match_parent"
+            android:text="Tình hình Covid"
+            android:textSize="24dp"
+            android:layout_height="50dp" />
 
         <TextView
             android:id="@+id/backTxt"

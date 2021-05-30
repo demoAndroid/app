@@ -15,6 +15,8 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.truyenol.R;
+import com.example.truyenol.activity.MainCovid;
+import com.example.truyenol.activity.MainDangNhap;
 import com.example.truyenol.activity.ModifyStory.MainActivity;
 
 import org.jetbrains.annotations.NotNull;
@@ -36,6 +38,7 @@ public class AccountFragment extends Fragment {
         Bundle bundle = getArguments();
 
 
+
         if(bundle!=null){
             idUser = bundle.getInt("idUser");
             fullname = bundle.getString("fullname");
@@ -51,6 +54,7 @@ public class AccountFragment extends Fragment {
         roleTxt.setText(position);
 
         TextView userInfo = (TextView) view.findViewById(R.id.userInfo);
+        TextView btncovid = (TextView) view.findViewById(R.id.btncovid);
         TextView editStory = (TextView) view.findViewById(R.id.editStory);
         TextView backTxt = (TextView) view.findViewById(R.id.backTxt);
         if(position.equals("Admin")) editStory.setVisibility(View.VISIBLE);
@@ -60,6 +64,20 @@ public class AccountFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), MainActivity.class);
                 startActivity(intent);
+            }
+        });
+        btncovid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(),MainCovid.class);
+                startActivity(i);
+            }
+        });
+        backTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent a = new Intent(getContext(),MainDangNhap.class);
+                startActivity(a);
             }
         });
         return view;

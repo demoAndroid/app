@@ -65,8 +65,10 @@ public class MainDangNhap extends AppCompatActivity {
                         bundle.putString("position",phanquyen);
                         intent.putExtras(bundle);
                         startActivity(intent);
+                        Log.d("Sai thông tin đăng nhập","Thử lại");
                         if (tentaikhoan.equals("") || matkhau.equals("")){
                             Log.e("Thiếu thông tin", "Thất bại");
+
                         }
 
                     }
