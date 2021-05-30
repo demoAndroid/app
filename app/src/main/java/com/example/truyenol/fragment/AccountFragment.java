@@ -26,6 +26,7 @@ import static android.view.View.GONE;
 public class AccountFragment extends Fragment {
     int idUser;
     String fullname, position,email,linkAva;
+
     @SuppressLint("SdCardPath")
     @Nullable
     @org.jetbrains.annotations.Nullable
@@ -33,6 +34,8 @@ public class AccountFragment extends Fragment {
     public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.account_fragment,container,false);
         Bundle bundle = getArguments();
+
+
         if(bundle!=null){
             idUser = bundle.getInt("idUser");
             fullname = bundle.getString("fullname");
@@ -61,4 +64,5 @@ public class AccountFragment extends Fragment {
         });
         return view;
     }
+
 }
