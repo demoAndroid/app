@@ -47,17 +47,21 @@ public class MainCovid extends AppCompatActivity {
                                 int active = Integer.parseInt(list.get(i).getActive());
                                 int recovered = Integer.parseInt(list.get(i).getRecovered());
                                 int death = Integer.parseInt(list.get(i).getDeaths());
+                                int test = Integer.parseInt(list.get(i).getTests());
 
 
                                 totalConfirm.setText(NumberFormat.getInstance().format(confirm));
-                                todayRecovered.setText(NumberFormat.getInstance().format(recovered));
+                                totalRecovered.setText(NumberFormat.getInstance().format(recovered));
                                 totalDeath.setText(NumberFormat.getInstance().format(death));
                                 totalActive.setText(NumberFormat.getInstance().format(active));
+                                totalTests.setText(NumberFormat.getInstance().format(test));
+
 
                                 todayConfirm.setText(NumberFormat.getInstance().format(Integer.parseInt(list.get(i).getTodayCases())));
+                                todayActive.setText(NumberFormat.getInstance().format(Integer.parseInt(list.get(i).getActive())));
                                 todayDeath.setText(NumberFormat.getInstance().format(Integer.parseInt(list.get(i).getTodayDeaths())));
                                 todayRecovered.setText(NumberFormat.getInstance().format(Integer.parseInt(list.get(i).getTodayRecovered())));
-                                totalTests.setText(NumberFormat.getInstance().format(Integer.parseInt(list.get(i).getTests())));
+//                                todayTests.setText(NumberFormat.getInstance().format(Integer.parseInt(list.get(i).getTodayTests())));
 
                                 setText(list.get(i).getUpdated());
 

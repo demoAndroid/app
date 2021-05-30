@@ -197,7 +197,7 @@
             android:layout_marginBottom="10dp"
             android:columnCount="2">
 
-            <com.google.android.material.card.MaterialCardView
+            <LinearLayout
                 android:layout_height="wrap_content"
                 android:layout_width="170dp"
                 android:layout_columnWeight="1"
@@ -260,8 +260,8 @@
 
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
-            <com.google.android.material.card.MaterialCardView
+            </LinearLayout>
+            <LinearLayout
                 android:layout_height="wrap_content"
                 android:layout_width="170dp"
                 android:layout_columnWeight="1"
@@ -324,8 +324,8 @@
 
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
-            <com.google.android.material.card.MaterialCardView
+            </LinearLayout>
+            <LinearLayout
                 android:layout_height="wrap_content"
                 android:layout_width="170dp"
                 android:layout_columnWeight="1"
@@ -388,8 +388,8 @@
 
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
-            <com.google.android.material.card.MaterialCardView
+            </LinearLayout>
+            <LinearLayout
                 android:layout_height="wrap_content"
                 android:layout_width="170dp"
                 android:layout_columnWeight="1"
@@ -452,8 +452,8 @@
 
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
-            <com.google.android.material.card.MaterialCardView
+            </LinearLayout>
+            <LinearLayout
                 android:layout_height="wrap_content"
                 android:layout_width="170dp"
                 android:layout_columnWeight="1"
@@ -508,7 +508,6 @@
                         android:textStyle="bold"
                         android:layout_marginTop="7dp"
                         android:layout_marginBottom="10dp"
-                        android:text="(+32)"
                         android:textColor="#333"
                         android:textSize="15dp" />
 
@@ -516,7 +515,7 @@
 
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
 
 
 

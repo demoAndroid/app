@@ -14,8 +14,9 @@ public class CountryData {
     private String todayRecovered;
     private String active;
     private String tests;
+    private String todayTests;
 
-    public CountryData(String updated, String country, String cases, String todayCases, String deaths, String todayDeaths, String recovered, String todayRecovered, String active, String tests) {
+    public CountryData(String updated, String country, String cases, String todayCases, String deaths, String todayDeaths, String recovered, String todayRecovered, String active, String tests, String todayTests) {
         this.updated = updated;
         this.country = country;
         this.cases = cases;
@@ -26,6 +27,7 @@ public class CountryData {
         this.todayRecovered = todayRecovered;
         this.active = active;
         this.tests = tests;
+        this.todayTests = todayTests;
     }
 
     public String getUpdated() {
@@ -106,5 +108,13 @@ public class CountryData {
 
     public void setTests(String tests) {
         this.tests = tests;
+    }
+
+    public String getTodayTests() {
+        return todayTests;
+    }
+
+    public void setTodayTests(String todayTests) {
+        this.todayTests = todayTests;
     }
 }
