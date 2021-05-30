@@ -2,6 +2,7 @@ package com.example.truyenol.activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
@@ -116,12 +117,18 @@ public class MainDangKy extends AppCompatActivity {
 
     }
     private void doSetLinkAva(){
-        Intent setlink = new Intent(Intent.ACTION_GET_CONTENT);
-        setlink.setType("*/*");
-        startActivityForResult(setlink,1);
+//        Intent setlink = new Intent(Intent.ACTION_GET_CONTENT);
+//        setlink.setType("*/*");
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.setType("image/*");
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION
+                | Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+                | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+        startActivityForResult(intent,1);
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE_CAMERA&& resultCode == RESULT_OK && data != null){
@@ -129,8 +136,9 @@ public class MainDangKy extends AppCompatActivity {
             imgPhoto.setImageBitmap(bitmap);
         }
         if(requestCode==1&&resultCode==RESULT_OK){
-            String path= data.getData().getPath();
-            linkAva.setText(path);
+            Uri uri = data.getData();
+            getContentResolver().takePersistableUriPermission(data.getData(), Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            linkAva.setText(uri.toString());
         }
 
         if (requestCode == REQUEST_CODE_FOLDER&&resultCode == RESULT_OK&&data!=null){

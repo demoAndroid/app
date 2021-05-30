@@ -18,11 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity android:name=".activity.MainCovid">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".activity.ModifyStory.SearchStory" />
         <activity android:name=".activity.ModifyStory.ModifyChapter" />
@@ -35,7 +31,11 @@
         <activity android:name=".activity.HomeActivity" />
         <activity android:name=".activity.MainDangKy" />
         <activity android:name=".activity.MainDangNhap">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".activity.InfoStoryActivity" />
     </application>
