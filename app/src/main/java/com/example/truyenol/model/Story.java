@@ -15,6 +15,12 @@ public class Story {
     private float rating;
 
     public Story() {
+        nameStory=null;
+        type=null;
+        description=null;
+        author=null;
+        linkImg=null;
+        chapters=null;
     }
 
     public Story(int id, String nameStory, String type, boolean status, String description, String author, String linkImg, int numberChapter) {

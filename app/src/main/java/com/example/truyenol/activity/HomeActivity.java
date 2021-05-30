@@ -1,27 +1,20 @@
 package com.example.truyenol.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.GridView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.truyenol.R;
-import com.example.truyenol.adapter.StoryAdapter;
-import com.example.truyenol.database.DatabaseHandler;
 import com.example.truyenol.fragment.AccountFragment;
 import com.example.truyenol.fragment.HomeFragment;
 import com.example.truyenol.fragment.RankingFragment;
@@ -29,17 +22,19 @@ import com.example.truyenol.model.Story;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
-
-
+    private ArrayList<Story> stories=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        getTopStory();
         BottomNavigationView bottomNav = findViewById(R.id.botNavigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
         bottomNav.setSelectedItemId(R.id.navigation_home);
@@ -58,7 +53,8 @@ public class HomeActivity extends AppCompatActivity {
                             fragment = new HomeFragment();
                             break;
                         case R.id.navigation_ranking:
-                            fragment = new RankingFragment();
+                            fragment = new RankingFragment(stories);
+
                             break;
                         case R.id.navigation_user:
                             fragment = new AccountFragment();
@@ -72,6 +68,34 @@ public class HomeActivity extends AppCompatActivity {
                     return true;
                 }
             };
-
+    public void getTopStory(){
+        RequestQueue queue= Volley.newRequestQueue(getBaseContext());
+        String url = "https://api.jikan.moe/v3/top/manga/1/manga";
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray jsonArray=response.getJSONArray("top");
+                            for(int i=0;i<jsonArray.length();i++){
+                                JSONObject jsonObject=jsonArray.getJSONObject(i);
+                                Story story=new Story();
+                                story.setNameStory(jsonObject.getString("title"));
+                                story.setLinkImg(jsonObject.getString("image_url"));
+                                story.setType(jsonObject.getString("type"));
+                                story.setRating((float) jsonObject.getDouble("score"));
+                                stories.add(story);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                });
+        queue.add(jsonObjectRequest);
+    }
 
 }
