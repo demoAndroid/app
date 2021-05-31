@@ -352,6 +352,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Cursor res = db.rawQuery(  "SELECT * FROM "+TABLE_USER,null );
         return res;
     }
+    public Cursor getData2(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery(  "SELECT * FROM "+TABLE_STORY,null );
+        return res;
+    }
     public  void  addTaikhoan(User user){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();

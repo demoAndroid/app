@@ -17,8 +17,9 @@
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".activity.UserInfoActivity"></activity>
-        <activity android:name=".activity.MainCovid"></activity>
+        <activity android:name=".activity.TimKiemActivity"></activity>
+        <activity android:name=".activity.UserInfoActivity" />
+        <activity android:name=".activity.MainCovid" />
         <activity android:name=".activity.ModifyStory.SearchStory" />
         <activity android:name=".activity.ModifyStory.ModifyChapter" />
         <activity android:name=".activity.ContentActivity" />
