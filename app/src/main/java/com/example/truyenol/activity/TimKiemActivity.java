@@ -3,126 +3,56 @@ package com.example.truyenol.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
-import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.truyenol.R;
-import com.example.truyenol.adapter.TruyenAdapter;
+import com.example.truyenol.adapter.SearchAdapter;
+import com.example.truyenol.adapter.StoryAdapter;
+import com.example.truyenol.adapter.StoryListViewAdapter;
 import com.example.truyenol.database.DatabaseHandler;
 import com.example.truyenol.model.Story;
+import com.example.truyenol.model.User;
 
 import java.util.ArrayList;
 
 public class TimKiemActivity extends AppCompatActivity {
-
-    ArrayList<Story> arrayList;
-    ArrayList<Story> StoryArrayList;
+    int idUser;
+    String fullname, position,email,linkAva;
     ListView listView;
     EditText edt;
-    TruyenAdapter StoryAdapter;
-    DatabaseHandler DatabaseHandler;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if(bundle!=null){
+            idUser = bundle.getInt("idUser");
+            fullname = bundle.getString("fullname");
+            position = bundle.getString("position");
+            email = bundle.getString("email");
+            linkAva = bundle.getString("linkAva");
+        }
         setContentView(R.layout.activity_tim_kiem);
-
-
-
         listView =findViewById(R.id.listviewTimKiem);
         edt = findViewById(R.id.edit_search);
-
-
-        init();
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        Button searchButton = (Button)findViewById(R.id.button1);
+        searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(TimKiemActivity.this,InfoStoryActivity.class);
-                String tenTruyen = arrayList.get(position).getNameStory();
-                String noidung = arrayList.get(position).getDescription();
-                intent.putExtra("tenTruyen", tenTruyen);
-                intent.putExtra("moTa", noidung);
-                startActivity(intent);
+            public void onClick(View v) {
+                User user = new User(idUser,null,null,fullname,email,linkAva,position);
+                String name = edt.getText().toString();
+                DatabaseHandler db = new DatabaseHandler(getBaseContext());
+                ArrayList<Story> listStory = new ArrayList<>();
+                listStory = db.getStoriesByName(name);
+                SearchAdapter truyenAdapter = new SearchAdapter(getApplicationContext(),listStory);
+                listView.setAdapter(truyenAdapter);
             }
         });
-
-        edt.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                filter(s.toString());
-
-            }
-        });
-    }
-
-    private void filter(String text){
-        arrayList.clear();
-        ArrayList<Story> filteredList = new ArrayList<>();
-
-        for(Story item : StoryArrayList){
-            if(item.getNameStory().toLowerCase().contains(text.toLowerCase())){
-                filteredList.add(item);
-
-                arrayList.add(item);
-            }
-
-        }
-        StoryAdapter.filterList(filteredList);
-    }
-
-    private void init(){
-        StoryArrayList = new ArrayList<>();
-
-        arrayList = new ArrayList<>();
-
-        DatabaseHandler = new DatabaseHandler(this);
-
-        Cursor cursor = DatabaseHandler.getData2();
-
-        while (cursor.moveToNext()){
-            int id = cursor.getInt(0);
-            String tenTruyen = cursor.getString(1);
-            String theLoai = cursor.getString(2);
-            boolean trangThai = Boolean.parseBoolean(cursor.getString(3));
-            String moTa = cursor.getString(4);
-            String tacGia = cursor.getString(5);
-            String anh = cursor.getString(6);
-            int chap = cursor.getInt(7);
-
-
-            StoryArrayList.add(new Story(id,tenTruyen,theLoai,trangThai,moTa,tacGia,anh,chap));
-
-
-            arrayList.add(new Story(id,tenTruyen,theLoai,trangThai,moTa,tacGia,anh,chap));
-
-
-
-
-            StoryAdapter = new TruyenAdapter(getApplicationContext(),StoryArrayList);
-            listView.setAdapter(StoryAdapter);
-        }
-        cursor.moveToFirst();
-        cursor.close();
-
 
     }
 }

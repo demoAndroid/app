@@ -20,12 +20,10 @@ import java.util.List;
 public class TruyenAdapter extends BaseAdapter {
     private final Context context;
     private List<Story> list = new ArrayList<>();
-    private User user = new User();
-    private ArrayList<Story> listTruyen;
 
-    public TruyenAdapter(Context context, ArrayList<Story> listTruyen){
+    public TruyenAdapter(Context context, List<Story> list){
         this.context = context;
-        this.listTruyen = listTruyen;
+        this.list = list;
     }
 
     @Override
@@ -52,10 +50,6 @@ public class TruyenAdapter extends BaseAdapter {
         ImageView imgStory = convertView.findViewById(R.id.imgHome);
         Glide.with(context).load(list.get(position).getLinkImg()).into(imgStory);
         return convertView;
-    }
-    public void filterList(ArrayList<Story> filteredList) {
-        list = filteredList;
-        notifyDataSetChanged();
     }
 }
 

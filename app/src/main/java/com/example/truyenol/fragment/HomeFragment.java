@@ -14,9 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.truyenol.R;
 import com.example.truyenol.activity.InfoStoryActivity;
-import com.example.truyenol.activity.StoryChapterActivity;
 import com.example.truyenol.activity.TimKiemActivity;
-import com.example.truyenol.activity.UserInfoActivity;
 import com.example.truyenol.adapter.StoryAdapter;
 import com.example.truyenol.database.DatabaseHandler;
 import com.example.truyenol.model.Story;
@@ -28,21 +26,12 @@ import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
     int idUser;
-    private  Button btnSearch;
     String fullname, position,email,linkAva;
     @Nullable
     @org.jetbrains.annotations.Nullable
     @Override
     public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_fragment, container, false);
-        btnSearch = (Button)view.findViewById(R.id.searchBtn);
-        btnSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), TimKiemActivity.class);
-                startActivity(intent);
-            }
-        });
         Bundle bundle = getArguments();
         if(bundle!=null){
             idUser = bundle.getInt("idUser");
@@ -51,6 +40,15 @@ public class HomeFragment extends Fragment {
             email = bundle.getString("email");
             linkAva = bundle.getString("linkAva");
         }
+        Button searchBtn = (Button)view.findViewById(R.id.searchBtn);
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), TimKiemActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
         User user = new User(idUser,null,null,fullname,email,linkAva,position);
         DatabaseHandler db1 = new DatabaseHandler(getContext());
         final ArrayList<Story> list1 = db1.getNewStory();
