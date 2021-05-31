@@ -27,7 +27,6 @@ public class InfoStoryActivity extends AppCompatActivity {
         TextView statusTxt = (TextView)findViewById(R.id.statusTxt);
         TextView descripTxt = (TextView)findViewById(R.id.descripTxt);
         Button readBtn = (Button)findViewById(R.id.readBtn);
-        Button backBtn = (Button)findViewById(R.id.backBtn);
         Button type = (Button)findViewById(R.id.type);
         ImageView ava = (ImageView)findViewById(R.id.ava);
         if(bundle!=null){
@@ -51,13 +50,6 @@ public class InfoStoryActivity extends AppCompatActivity {
                 Intent intent1 = new Intent(getApplicationContext(), StoryChapterActivity.class);
                 intent1.putExtras(bundle);
                 startActivity(intent1);
-            }
-        });
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent2 = new Intent(getApplicationContext(), HomeActivity.class);
-                startActivity(intent2);
             }
         });
 
