@@ -56,7 +56,6 @@ public class HomeActivity extends AppCompatActivity {
                             break;
                         case R.id.navigation_ranking:
                             fragment = new RankingFragment(stories);
-
                             break;
                         case R.id.navigation_user:
                             fragment = new AccountFragment();
