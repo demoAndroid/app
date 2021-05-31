@@ -18,6 +18,7 @@ import com.example.truyenol.R;
 import com.example.truyenol.activity.MainCovid;
 import com.example.truyenol.activity.MainDangNhap;
 import com.example.truyenol.activity.ModifyStory.MainActivity;
+import com.example.truyenol.activity.UserInfoActivity;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -35,10 +36,8 @@ public class AccountFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.account_fragment,container,false);
+
         Bundle bundle = getArguments();
-
-
-
         if(bundle!=null){
             idUser = bundle.getInt("idUser");
             fullname = bundle.getString("fullname");
@@ -46,6 +45,7 @@ public class AccountFragment extends Fragment {
             email = bundle.getString("email");
             linkAva = bundle.getString("linkAva");
         }
+
         ImageView avaUser = (ImageView)view.findViewById(R.id.avaUser);
         Glide.with(getContext()).load(linkAva).into(avaUser);
         TextView nameUser = (TextView)view.findViewById(R.id.nameUser);
@@ -66,6 +66,16 @@ public class AccountFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        userInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), UserInfoActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
         btncovid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,6 +83,7 @@ public class AccountFragment extends Fragment {
                 startActivity(i);
             }
         });
+
         backTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,6 +91,7 @@ public class AccountFragment extends Fragment {
                 startActivity(a);
             }
         });
+
         return view;
     }
 

@@ -253,28 +253,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
         return listTh;
     }
-    public ArrayList<Story> getNgonTinh(){
-        SQLiteDatabase db = this.getReadableDatabase();
-        ArrayList<Story> listTh = new ArrayList<>();
-        Cursor cursor =  db.rawQuery( "select * from "+TABLE_STORY+" WHERE "+COLUMN_TYPE+" ='Ngôn Tình' LIMIT 6" , null );
-        if (cursor.moveToFirst()) {
-            do {
-                Story story = new Story();
-                story.setId(cursor.getInt(0));
-                story.setNameStory(cursor.getString(1));
-                story.setType(cursor.getString(2));
-                story.setStatus((cursor.getInt(6)>countChapters(cursor.getInt(0)))?true:false);
-                story.setDescription(cursor.getString(3));
-                story.setAuthor(cursor.getString(4));
-                story.setLinkImg(cursor.getString(5));
-                story.setNumberChapter(cursor.getInt(6));
-                listTh.add(story);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        db.close();
-        return listTh;
-    }
     public ArrayList<Story> getTopStory(){
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<Story> listTh = new ArrayList<>();

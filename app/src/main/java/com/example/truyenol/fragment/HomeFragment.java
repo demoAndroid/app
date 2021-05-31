@@ -45,7 +45,7 @@ public class HomeFragment extends Fragment {
         StoryAdapter adapter = new StoryAdapter(getContext(), list1,user);
         lv1.setAdapter(adapter);
 
-        final ArrayList<Story> list2 = db1.getNgonTinh();
+        final ArrayList<Story> list2 = db1.getAllStory();
         GridView lv2 = (GridView) view.findViewById(R.id.gridView2);
         StoryAdapter adapter1 = new StoryAdapter(getContext(), list2,user);
         lv2.setAdapter(adapter1);

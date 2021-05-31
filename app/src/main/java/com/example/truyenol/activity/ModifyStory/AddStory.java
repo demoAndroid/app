@@ -5,8 +5,11 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,9 +24,11 @@ import com.example.truyenol.model.Story;
 import java.util.ArrayList;
 
 public class AddStory extends AppCompatActivity {
-    private EditText storyTxt,typeTxt,authorTxt,desTxt,chapNumberTxt;
+    private EditText storyTxt,authorTxt,desTxt,chapNumberTxt;
     private TextView linkAvaTxt;
     private Button linkAvaBtn,saveBtn;
+    private Spinner typeSpinner;
+    private String[] type = {"Tiên Hiệp","Ngôn Tình","Kinh Dị","Huyền Huyễn"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +38,16 @@ public class AddStory extends AppCompatActivity {
 
         storyTxt=findViewById(R.id.nameStoryTxt2);
         chapNumberTxt=findViewById(R.id.chapterNumberTxt);
-        typeTxt=findViewById(R.id.nameStoryTxt2);
+        typeSpinner=findViewById(R.id.typeSpinner);
         authorTxt=findViewById(R.id.authorTxt);
         desTxt=findViewById(R.id.desTxt);
         linkAvaTxt=findViewById(R.id.linkTxt1);
         linkAvaBtn=findViewById(R.id.linkAvaBtn);
         saveBtn=findViewById(R.id.saveBtn);
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,type);
+        typeSpinner.setAdapter(arrayAdapter);
+        String typeTxt = typeSpinner.getSelectedItem().toString();
         //Set linkAvaBtn
         linkAvaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,7 +77,7 @@ public class AddStory extends AppCompatActivity {
         story.setAuthor(authorTxt.getText().toString());
         story.setChapters(new ArrayList<>());
         story.setDescription(desTxt.getText().toString());
-        story.setType(typeTxt.getText().toString());
+        story.setType(typeSpinner.getSelectedItem().toString());
         story.setLinkImg(linkAvaTxt.getText().toString());
         story.setNumberChapter(Integer.parseInt(chapNumberTxt.getText().toString()));
         story.setNameStory(storyTxt.getText().toString());

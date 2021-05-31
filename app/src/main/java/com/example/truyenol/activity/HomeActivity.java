@@ -56,6 +56,9 @@ public class HomeActivity extends AppCompatActivity {
                             break;
                         case R.id.navigation_ranking:
                             fragment = new RankingFragment(stories);
+                            Intent intent2 = getIntent();
+                            Bundle bundle2 = intent2.getExtras();
+                            fragment.setArguments(bundle2);
                             break;
                         case R.id.navigation_user:
                             fragment = new AccountFragment();
