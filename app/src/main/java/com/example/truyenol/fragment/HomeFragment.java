@@ -26,7 +26,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_fragment, container, false);
         DatabaseHandler db1 = new DatabaseHandler(getContext());
-        final ArrayList<Story> list1 = db1.getTienHiep();
+        final ArrayList<Story> list1 = db1.getNewStory();
         GridView lv1 = (GridView) view.findViewById(R.id.gridView1);
         StoryAdapter adapter = new StoryAdapter(getContext(), list1);
         lv1.setAdapter(adapter);

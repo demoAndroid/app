@@ -47,7 +47,7 @@ public class AccountFragment extends Fragment {
             linkAva = bundle.getString("linkAva");
         }
         ImageView avaUser = (ImageView)view.findViewById(R.id.avaUser);
-        Glide.with(getContext()).load(new File(linkAva)).into(avaUser);
+        Glide.with(getContext()).load(linkAva).into(avaUser);
         TextView nameUser = (TextView)view.findViewById(R.id.nameUser);
         nameUser.setText(fullname);
         TextView roleTxt = (TextView)view.findViewById(R.id.roleTxt);

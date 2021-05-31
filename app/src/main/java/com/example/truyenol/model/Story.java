@@ -12,7 +12,7 @@ public class Story {
     private String linkImg;
     private int numberChapter;
     private ArrayList<Chapter> chapters;
-    private float rating;
+
 
     public Story() {
         nameStory=null;
@@ -45,7 +45,6 @@ public class Story {
                 ", author='" + author + '\'' +
                 ", linkImg='" + linkImg + '\'' +
                 ", numberChapter='" + numberChapter + '\'' +
-                ", rating='" + rating + '\'' +
                 '}';
     }
 
@@ -97,13 +96,6 @@ public class Story {
         this.author = author;
     }
 
-    public float getRating() {
-        return rating;
-    }
-
-    public void setRating(float rating) {
-        this.rating = rating;
-    }
 
     public String getLinkImg() {
         return linkImg;

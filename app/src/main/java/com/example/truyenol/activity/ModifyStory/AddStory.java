@@ -4,12 +4,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,15 +16,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.truyenol.R;
 import com.example.truyenol.database.DatabaseHandler;
-import com.example.truyenol.model.Chapter;
 import com.example.truyenol.model.Story;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class AddStory extends AppCompatActivity {
     private EditText storyTxt,typeTxt,authorTxt,desTxt,chapNumberTxt;
@@ -40,9 +31,9 @@ public class AddStory extends AppCompatActivity {
         //Gán biến View
         setContentView(R.layout.activity_add_story);
 
-        storyTxt=findViewById(R.id.nameStoryTxt);
+        storyTxt=findViewById(R.id.nameStoryTxt2);
         chapNumberTxt=findViewById(R.id.chapterNumberTxt);
-        typeTxt=findViewById(R.id.typeTxt);
+        typeTxt=findViewById(R.id.nameStoryTxt2);
         authorTxt=findViewById(R.id.authorTxt);
         desTxt=findViewById(R.id.desTxt);
         linkAvaTxt=findViewById(R.id.linkTxt1);

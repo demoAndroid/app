@@ -64,6 +64,7 @@ public class RankingAdapter extends BaseAdapter {
                 bundle.putString("author",list.get(position).getAuthor());
                 bundle.putString("type",list.get(position).getType());
                 bundle.putString("description",list.get(position).getDescription());
+                bundle.putBoolean("status",list.get(position).getStatus());
                 intent.putExtras(bundle);
 
                 context.startActivity(intent);

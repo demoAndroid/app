@@ -52,7 +52,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String COLUMN_IDSTORY_COMMENT = "idStory";
     private static final String COLUMN_IDUSER_COMMENT = "idUser";
     private static final String COLUMN_COMMENT = "comment";
-    private static final String COLUMN_RATING_COMMENT = "rating";
 
     //Table chapter
     private static final String TABLE_CHAPTER = "chapter";
@@ -94,7 +93,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String sqlQuery3 = "CREATE TABLE " + TABLE_COMMENT +"( " +
                 COLUMN_IDCOMMENT +" integer primary key autoincrement, " +
                 COLUMN_COMMENT + " TEXT, " +
-                COLUMN_RATING_COMMENT + " REAL, " +
                 COLUMN_IDUSER_COMMENT + " INTEGER, " +
                 COLUMN_IDSTORY_COMMENT + " INTEGER, " +
                 "FOREIGN KEY (" + COLUMN_IDUSER_COMMENT + ") REFERENCES " +
@@ -233,24 +231,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
         return result;
     }
-    public void addStoryTest(){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_NAMESTORY,"Thần Đạo Đan Tôn");
-        values.put(COLUMN_TYPE, "Tiên hiệp");
-        values.put(COLUMN_DESCRIPTION, "Lăng Hàn - Một Đan Đế đại danh đỉnh định mang trong thân mình tuyệt thế công pháp vì truy cầu bước cuối, xé bỏ tấm màn thành thần nhưng thất bại đã phải bỏ mình. Thế nhưng ông trời dường như không muốn tuyệt dường người, Lăng Hàn đã được trọng sinh vào một thiếu niên cùng tên và điều may mắn nhất là \"Bất Diệt Thiên Kinh\" ấn ký vẫn còn nằm nguyên trong tâm thức hắn.\n" +
-                "\n" +
-                "Từ nay về sau sóng gió cuộn trào nổi lên, Đan Đế ngày xưa bây giờ phải cùng tranh phong với vô số thiên tài trẻ tuổi, lại bắt đầu một truyền thuyết mới như để chứng minh với trời đất: Ta, là người mạnh nhất");
-        values.put(COLUMN_AUTHOR, "Cô Đơn Địa Phi");
-        values.put(COLUMN_LINKIMG, "https://static.8cache.com/cover/o/eJzLyTDW180MdfWNqgzzcqzM1w8rLI0oLjK2yMry1HeEAi8jE_1yU9-oqLIUi6QiA_1yI0NT3QxjIyNdz2QTIwDMDBQC/than-dao-dan-ton.jpg");
-        values.put(COLUMN_NUMBERCHAPTER, "5357");
-        db.insert(TABLE_STORY,null,values);
-        db.close();
-    }
-    public ArrayList<Story> getTienHiep(){
+    public ArrayList<Story> getNewStory(){
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<Story> listTh = new ArrayList<>();
-        Cursor cursor =  db.rawQuery( "select * from "+TABLE_STORY+" WHERE "+COLUMN_TYPE+" ='Tiên hiệp' LIMIT 6" , null );
+        Cursor cursor =  db.rawQuery( "select * from "+TABLE_STORY+ " ORDER BY idStory DESC LIMIT 10" , null );
         if (cursor.moveToFirst()) {
             do {
                 Story story = new Story();

@@ -25,11 +25,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.036" />
+
         <EditText
-            android:id="@+id/typeTxt"
+            android:id="@+id/nameStoryTxt2"
             android:layout_width="212dp"
             android:layout_height="wrap_content"
-            android:textSize="8sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.857"
@@ -56,17 +57,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.138" />
+
         <EditText
-            android:id="@+id/nameStoryTxt"
-            android:layout_width="212dp"
+            android:id="@+id/typeTxt"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="8sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.879"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.021" />
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName" />
 
 
     </LinearLayout>
@@ -87,11 +85,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.419" />
+
         <EditText
             android:id="@+id/desTxt"
             android:layout_width="207dp"
             android:layout_height="120dp"
-            android:textSize="8sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.849"
@@ -118,11 +117,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.241" />
+
         <EditText
             android:id="@+id/authorTxt"
             android:layout_width="208dp"
             android:layout_height="wrap_content"
-            android:textSize="8sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.864"
@@ -196,12 +196,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.848" />
+
         <EditText
             android:id="@+id/chapterNumberTxt"
             android:layout_width="207dp"
             android:layout_height="wrap_content"
             android:text=""
-            android:textSize="8sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.578"

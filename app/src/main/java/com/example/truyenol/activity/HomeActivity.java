@@ -27,9 +27,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class HomeActivity extends AppCompatActivity {
     private ArrayList<Story> stories=new ArrayList<>();
+    private String author[] = {"Kentaro Miura","Oda","Akira Toriyama","Fujiko Fujio","Naoki Urasawa"};
+    Random au = new Random();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,10 +41,6 @@ public class HomeActivity extends AppCompatActivity {
         BottomNavigationView bottomNav = findViewById(R.id.botNavigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
         bottomNav.setSelectedItemId(R.id.navigation_home);
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        AccountFragment accountFragment = new AccountFragment();
-        accountFragment.setArguments(bundle);
     }
     private BottomNavigationView.OnNavigationItemSelectedListener navListener=
             new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -51,6 +50,9 @@ public class HomeActivity extends AppCompatActivity {
                     switch (item.getItemId()){
                         case R.id.navigation_home:
                             fragment = new HomeFragment();
+                            Intent intent1 = getIntent();
+                            Bundle bundle1 = intent1.getExtras();
+                            fragment.setArguments(bundle1);
                             break;
                         case R.id.navigation_ranking:
                             fragment = new RankingFragment(stories);
@@ -78,12 +80,15 @@ public class HomeActivity extends AppCompatActivity {
                         try {
                             JSONArray jsonArray=response.getJSONArray("top");
                             for(int i=0;i<jsonArray.length();i++){
+                                int randomIndex = au.nextInt(author.length);
                                 JSONObject jsonObject=jsonArray.getJSONObject(i);
                                 Story story=new Story();
+                                story.setId(jsonObject.getInt("mal_id"));
                                 story.setNameStory(jsonObject.getString("title"));
                                 story.setLinkImg(jsonObject.getString("image_url"));
                                 story.setType(jsonObject.getString("type"));
-                                story.setRating((float) jsonObject.getDouble("score"));
+                                story.setStatus((jsonObject.getString("end_date")=="null")?true:false);
+                                story.setAuthor(author[randomIndex]);
                                 stories.add(story);
                             }
                         } catch (JSONException e) {

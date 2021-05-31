@@ -29,7 +29,10 @@ public class InfoStoryActivity extends AppCompatActivity {
         Button readBtn = (Button)findViewById(R.id.readBtn);
         Button backBtn = (Button)findViewById(R.id.backBtn);
         Button type = (Button)findViewById(R.id.type);
+        ImageView ava = (ImageView)findViewById(R.id.ava);
         if(bundle!=null){
+            String linkAva = bundle.getString("linkAva");
+            Glide.with((getApplicationContext())).load(linkAva).into(ava);
             String linkImg = bundle.getString("linkImg");
             Glide.with(getApplicationContext()).load(linkImg).into(imgStory);
             nameStoryTxt.setText(bundle.getString("nameStory"));

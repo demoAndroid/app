@@ -68,7 +68,7 @@ public class MainDangKy extends AppCompatActivity {
                 }
                 else {
                     databaseHandler.addTaikhoan(user1);
-                    Toast.makeText(MainDangKy.this,"Đăng ký thành công",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainDangKy.this,"Đăng ký thành công",Toast.LENGTH_LONG).show();
 
                 }
             }
@@ -84,7 +84,7 @@ public class MainDangKy extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent chonimg= new Intent(Intent.ACTION_PICK);
-                chonimg.setType("*/*");
+                chonimg.setType("image/*");
                 doSetLinkAva();
                 startActivityForResult(chonimg,REQUEST_CODE_FOLDER);
             }
@@ -140,7 +140,6 @@ public class MainDangKy extends AppCompatActivity {
             getContentResolver().takePersistableUriPermission(data.getData(), Intent.FLAG_GRANT_READ_URI_PERMISSION);
             linkAva.setText(uri.toString());
         }
-
         if (requestCode == REQUEST_CODE_FOLDER&&resultCode == RESULT_OK&&data!=null){
             Uri uri = data.getData();
             try{

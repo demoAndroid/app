@@ -3,15 +3,13 @@ package com.example.truyenol.model;
 public class Comment {
     private int id;
     private String comment;
-    private int rating;
 
     public Comment() {
     }
 
-    public Comment(int id, String comment, int rating) {
+    public Comment(int id, String comment) {
         this.id = id;
         this.comment = comment;
-        this.rating = rating;
     }
 
     public int getId() {
@@ -30,11 +28,4 @@ public class Comment {
         this.comment = comment;
     }
 
-    public int getRating() {
-        return rating;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
 }

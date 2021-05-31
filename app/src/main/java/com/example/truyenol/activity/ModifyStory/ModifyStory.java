@@ -31,8 +31,8 @@ public class ModifyStory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_story);
         linkTxt = findViewById(R.id.linkTxt);
-        typeTxt = findViewById(R.id.typeTxt);
-        nameStoryTxt = findViewById(R.id.nameStoryTxt);
+        typeTxt = findViewById(R.id.typeTxt2);
+        nameStoryTxt = findViewById(R.id.nameStoryTxt2);
         desTxt = findViewById(R.id.desTxt);
         authorTxt = findViewById(R.id.authorTxt);
         chapterNumberTxt = findViewById(R.id.chapterNumberTxt);

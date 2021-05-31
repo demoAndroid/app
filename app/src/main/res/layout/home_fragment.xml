@@ -52,7 +52,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="27dp"
                     android:fontFamily="serif"
-                    android:text="Tiên hiệp"
+                    android:text="Truyện mới"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
 
