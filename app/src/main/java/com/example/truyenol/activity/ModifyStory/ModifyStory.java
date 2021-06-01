@@ -5,8 +5,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,17 +23,20 @@ import com.example.truyenol.model.Story;
 import java.util.ArrayList;
 
 public class ModifyStory extends AppCompatActivity {
-    private EditText typeTxt, nameStoryTxt, desTxt, authorTxt, chapterNumberTxt;
+    private EditText nameStoryTxt, desTxt, authorTxt, chapterNumberTxt;
     private TextView linkTxt;
     private Button linkImg, saveBtn;
     private Story story;
+    private Spinner typeSpinner;
+    private ArrayAdapter arrayAdapter;
+    private String[] type = {"Tiên Hiệp","Ngôn Tình","Kinh Dị","Huyền Huyễn"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_story);
         linkTxt = findViewById(R.id.linkTxt);
-        typeTxt = findViewById(R.id.typeTxt2);
+        typeSpinner = findViewById(R.id.typeSpinner);
         nameStoryTxt = findViewById(R.id.nameStoryTxt2);
         desTxt = findViewById(R.id.desTxt);
         authorTxt = findViewById(R.id.authorTxt);
@@ -39,6 +44,8 @@ public class ModifyStory extends AppCompatActivity {
         linkImg = findViewById(R.id.linkAvaBtn);
         saveBtn = findViewById(R.id.saveBtn);
         getStory();
+        arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,type);
+        typeSpinner.setAdapter(arrayAdapter);
         linkImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,7 +74,7 @@ public class ModifyStory extends AppCompatActivity {
         story.setAuthor(authorTxt.getText().toString());
         story.setChapters(new ArrayList<>());
         story.setDescription(desTxt.getText().toString());
-        story.setType(typeTxt.getText().toString());
+        story.setType(typeSpinner.getSelectedItem().toString());
         story.setLinkImg(linkTxt.getText().toString());
         story.setNumberChapter(Integer.parseInt(chapterNumberTxt.getText().toString()));
         story.setNameStory(nameStoryTxt.getText().toString());
@@ -83,7 +90,7 @@ public class ModifyStory extends AppCompatActivity {
         Intent intent = this.getIntent();
         DatabaseHandler db = new DatabaseHandler(getBaseContext());
         story = db.getStoriesById(Integer.parseInt(intent.getStringExtra("id")));
-        typeTxt.setText(story.getType());
+        typeSpinner.setSelection(arrayAdapter.getPosition(story.getType()));
         nameStoryTxt.setText(story.getNameStory());
         desTxt.setText(story.getDescription());
         authorTxt.setText(story.getAuthor());
