@@ -43,9 +43,9 @@ public class ModifyStory extends AppCompatActivity {
         chapterNumberTxt = findViewById(R.id.chapterNumberTxt);
         linkImg = findViewById(R.id.linkAvaBtn);
         saveBtn = findViewById(R.id.saveBtn);
-        getStory();
         arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,type);
         typeSpinner.setAdapter(arrayAdapter);
+        getStory();
         linkImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
