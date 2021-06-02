@@ -8,6 +8,7 @@
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -17,7 +18,8 @@
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".activity.TimKiemActivity"></activity>
+        <activity android:name=".activity.CommentActivity"></activity>
+        <activity android:name=".activity.TimKiemActivity" />
         <activity android:name=".activity.UserInfoActivity" />
         <activity android:name=".activity.MainCovid" />
         <activity android:name=".activity.ModifyStory.SearchStory" />
@@ -27,10 +29,8 @@
         <activity android:name=".activity.ModifyStory.AddStory" />
         <activity android:name=".activity.ModifyStory.ModifyStory" />
         <activity android:name=".activity.ModifyStory.DeleteStory" />
-        <activity android:name=".activity.ModifyStory.MainActivity">
-        </activity>
-        <activity android:name=".activity.HomeActivity" >
-        </activity>
+        <activity android:name=".activity.ModifyStory.MainActivity"></activity>
+        <activity android:name=".activity.HomeActivity"></activity>
         <activity android:name=".activity.MainDangKy" />
         <activity android:name=".activity.MainDangNhap">
             <intent-filter>
@@ -41,6 +41,5 @@
         </activity>
         <activity android:name=".activity.InfoStoryActivity" />
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

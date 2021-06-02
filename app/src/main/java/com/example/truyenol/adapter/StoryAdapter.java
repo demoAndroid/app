@@ -65,7 +65,7 @@ public class StoryAdapter extends BaseAdapter {
                 Intent intent = new Intent(context, InfoStoryActivity.class);
                 Bundle bundle = new Bundle();
                 //Truyền data
-                bundle.putInt("id", list.get(position).getId());
+                bundle.putInt("idStory", list.get(position).getId());
                 bundle.putString("linkImg",list.get(position).getLinkImg());
                 bundle.putString("nameStory",list.get(position).getNameStory());
                 bundle.putBoolean("status",list.get(position).getStatus());

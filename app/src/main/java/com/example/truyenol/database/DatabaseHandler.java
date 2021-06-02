@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.example.truyenol.R;
 import com.example.truyenol.adapter.StoryAdapter;
 import com.example.truyenol.model.Chapter;
+import com.example.truyenol.model.Comment;
 import com.example.truyenol.model.Story;
 import com.example.truyenol.model.User;
 
@@ -253,42 +254,44 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
         return listTh;
     }
-    public ArrayList<Story> getTopStory(){
-        SQLiteDatabase db = this.getReadableDatabase();
-        ArrayList<Story> listTh = new ArrayList<>();
-        Cursor cursor =  db.rawQuery( "select * from " + TABLE_STORY + " ORDER BY rating DESC LIMIT 20" , null );
+    public  void addComment (Comment comment, int idStory){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_COMMENT, comment.getComment());
+        values.put(COLUMN_IDUSER_COMMENT, comment.getUser().getId());
+        values.put(COLUMN_IDSTORY_COMMENT,idStory);
+        db.insert(TABLE_COMMENT,null,values);
+        db.close();
+    }
+
+    public List<Comment> getCommnet(int idStory){
+        List<Comment> listComment = new ArrayList<>();
+        User user = new User();
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM comment INNER JOIN user ON comment.idUser = user.idUser WHERE comment.idStory = " + idStory;
+        Cursor cursor = db.rawQuery(query,null);
         if (cursor.moveToFirst()) {
             do {
-                Story story = new Story();
-                story.setId(cursor.getInt(0));
-                story.setNameStory(cursor.getString(1));
-                story.setType(cursor.getString(2));
-                story.setStatus((cursor.getInt(6)>countChapters(cursor.getInt(0)))?true:false);
-                story.setDescription(cursor.getString(3));
-                story.setAuthor(cursor.getString(4));
-                story.setLinkImg(cursor.getString(5));
-                story.setNumberChapter(cursor.getInt(6));
-                listTh.add(story);
+                Comment comment = new Comment();
+                comment.setId(cursor.getInt(0));
+                comment.setComment(cursor.getString(1));
+                user.setPassword(cursor.getString(7));
+                user.setUsername(cursor.getString(6));
+                user.setFullName(cursor.getString(8));
+                user.setEmail(cursor.getString(9));
+                user.setPosition(cursor.getString(11));
+                user.setLinkAva(cursor.getString(10));
+                comment.setUser(user);
+                listComment.add(comment);
             } while (cursor.moveToNext());
         }
         cursor.close();
         db.close();
-        return listTh;
+        return  listComment;
     }
 
-    public Story getStoryById(int id){
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM story WHERE idStory ="+ id+ "",null );
-        if (cursor != null)
-            cursor.moveToFirst();
 
-        Story story = new Story(cursor.getInt(0),cursor.getString(1),
-                cursor.getString(2),(cursor.getInt(6)>countChapters(cursor.getInt(0)))?true:false,cursor.getString(3),
-                cursor.getString(4),cursor.getString(5),cursor.getInt(6));
-        cursor.close();
-        db.close();
-        return story;
-    }
+
     public ArrayList<Story> getAllStory() {
 
         ArrayList<Story> listStory = new ArrayList<Story>();

@@ -29,8 +29,6 @@ public class TimKiemActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
         setContentView(R.layout.activity_tim_kiem);
         listView =findViewById(R.id.listviewTimKiem);
         edt = findViewById(R.id.edit_search);
