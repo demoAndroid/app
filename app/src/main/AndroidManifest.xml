@@ -27,8 +27,10 @@
         <activity android:name=".activity.ModifyStory.AddStory" />
         <activity android:name=".activity.ModifyStory.ModifyStory" />
         <activity android:name=".activity.ModifyStory.DeleteStory" />
-        <activity android:name=".activity.ModifyStory.MainActivity" />
-        <activity android:name=".activity.HomeActivity" />
+        <activity android:name=".activity.ModifyStory.MainActivity">
+        </activity>
+        <activity android:name=".activity.HomeActivity" >
+        </activity>
         <activity android:name=".activity.MainDangKy" />
         <activity android:name=".activity.MainDangNhap">
             <intent-filter>
@@ -39,5 +41,6 @@
         </activity>
         <activity android:name=".activity.InfoStoryActivity" />
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
