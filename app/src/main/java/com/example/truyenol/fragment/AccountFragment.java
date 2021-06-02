@@ -1,7 +1,9 @@
 package com.example.truyenol.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,14 +39,11 @@ public class AccountFragment extends Fragment {
     public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.account_fragment,container,false);
 
-        Bundle bundle = getArguments();
-        if(bundle!=null){
-            idUser = bundle.getInt("idUser");
-            fullname = bundle.getString("fullname");
-            position = bundle.getString("position");
-            email = bundle.getString("email");
-            linkAva = bundle.getString("linkAva");
-        }
+        idUser = getContext().getSharedPreferences("User", Context.MODE_PRIVATE).getInt("idUser",0);
+        fullname = getContext().getSharedPreferences("User",Context.MODE_PRIVATE).getString("fullname",null);
+        position = getContext().getSharedPreferences("User",Context.MODE_PRIVATE).getString("position",null);
+        email = getContext().getSharedPreferences("User",Context.MODE_PRIVATE).getString("email",null);
+        linkAva = getContext().getSharedPreferences("User",Context.MODE_PRIVATE).getString("linkAva",null);
 
         ImageView avaUser = (ImageView)view.findViewById(R.id.avaUser);
         Glide.with(getContext()).load(linkAva).into(avaUser);
@@ -71,7 +70,6 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), UserInfoActivity.class);
-                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
@@ -88,6 +86,10 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent a = new Intent(getContext(),MainDangNhap.class);
+                SharedPreferences sharedPreferences = getContext().getSharedPreferences("User",Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.clear();
+                editor.commit();
                 startActivity(a);
             }
         });

@@ -21,6 +21,7 @@ public class InfoStoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_infostory);
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
+        String linkAva = getSharedPreferences("User",MODE_PRIVATE).getString("linkAva",null);
         ImageView imgStory = (ImageView)findViewById(R.id.storyInfoImg);
         TextView nameStoryTxt = (TextView)findViewById(R.id.nameTxt);
         TextView authorTxt = (TextView)findViewById(R.id.authorTxt);
@@ -30,7 +31,6 @@ public class InfoStoryActivity extends AppCompatActivity {
         Button type = (Button)findViewById(R.id.type);
         ImageView ava = (ImageView)findViewById(R.id.ava);
         if(bundle!=null){
-            String linkAva = bundle.getString("linkAva");
             Glide.with((getApplicationContext())).load(linkAva).into(ava);
             String linkImg = bundle.getString("linkImg");
             Glide.with(getApplicationContext()).load(linkImg).into(imgStory);

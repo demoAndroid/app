@@ -52,10 +52,11 @@ public class SearchAdapter extends BaseAdapter {
         ImageView imgStory = convertView.findViewById(R.id.imgSearch);
         Glide.with(context).load(list.get(position).getLinkImg()).into(imgStory);
 
-        nameStoryTxt.setOnClickListener(new View.OnClickListener(){
+        nameStoryTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, InfoStoryActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 Bundle bundle = new Bundle();
                 //Truyền data
                 bundle.putInt("id", list.get(position).getId());
@@ -70,8 +71,6 @@ public class SearchAdapter extends BaseAdapter {
                 context.startActivity(intent);
             }
         });
-
-
         return convertView;
     }
 

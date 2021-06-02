@@ -50,21 +50,12 @@ public class HomeActivity extends AppCompatActivity {
                     switch (item.getItemId()){
                         case R.id.navigation_home:
                             fragment = new HomeFragment();
-                            Intent intent1 = getIntent();
-                            Bundle bundle1 = intent1.getExtras();
-                            fragment.setArguments(bundle1);
                             break;
                         case R.id.navigation_ranking:
                             fragment = new RankingFragment(stories);
-                            Intent intent2 = getIntent();
-                            Bundle bundle2 = intent2.getExtras();
-                            fragment.setArguments(bundle2);
                             break;
                         case R.id.navigation_user:
                             fragment = new AccountFragment();
-                            Intent intent = getIntent();
-                            Bundle bundle = intent.getExtras();
-                            fragment.setArguments(bundle);
                             break;
                     }
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_selected,

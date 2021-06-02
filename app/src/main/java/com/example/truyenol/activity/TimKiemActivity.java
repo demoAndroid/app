@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -30,13 +31,6 @@ public class TimKiemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        if(bundle!=null){
-            idUser = bundle.getInt("idUser");
-            fullname = bundle.getString("fullname");
-            position = bundle.getString("position");
-            email = bundle.getString("email");
-            linkAva = bundle.getString("linkAva");
-        }
         setContentView(R.layout.activity_tim_kiem);
         listView =findViewById(R.id.listviewTimKiem);
         edt = findViewById(R.id.edit_search);
@@ -44,13 +38,12 @@ public class TimKiemActivity extends AppCompatActivity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                User user = new User(idUser,null,null,fullname,email,linkAva,position);
                 String name = edt.getText().toString();
                 DatabaseHandler db = new DatabaseHandler(getBaseContext());
                 ArrayList<Story> listStory = new ArrayList<>();
                 listStory = db.getStoriesByName(name);
-                SearchAdapter truyenAdapter = new SearchAdapter(getApplicationContext(),listStory);
-                listView.setAdapter(truyenAdapter);
+                SearchAdapter searchAdapter = new SearchAdapter(getApplicationContext(),listStory);
+                listView.setAdapter(searchAdapter);
             }
         });
 

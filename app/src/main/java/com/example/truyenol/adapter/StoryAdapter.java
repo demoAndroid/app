@@ -28,11 +28,10 @@ import java.util.List;
 public class StoryAdapter extends BaseAdapter {
     private final Context context;
     private List<Story> list = new ArrayList<>();
-    private User user = new User();
-    public StoryAdapter(Context context, ArrayList<Story> list, User user) {
+    public StoryAdapter(Context context, ArrayList<Story> list) {
         this.context = context;
         this.list = list;
-        this.user = user;
+
     }
 
     @Override
@@ -66,11 +65,6 @@ public class StoryAdapter extends BaseAdapter {
                 Intent intent = new Intent(context, InfoStoryActivity.class);
                 Bundle bundle = new Bundle();
                 //Truyền data
-                bundle.putInt("idUser", user.getId());
-                bundle.putString("linkAva",user.getLinkAva());
-                bundle.putString("fullname",user.getFullName());
-                bundle.putString("email",user.getEmail());
-                bundle.putString("position",user.getPosition());
                 bundle.putInt("id", list.get(position).getId());
                 bundle.putString("linkImg",list.get(position).getLinkImg());
                 bundle.putString("nameStory",list.get(position).getNameStory());

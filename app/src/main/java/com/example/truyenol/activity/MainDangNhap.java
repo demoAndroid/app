@@ -3,6 +3,7 @@ package com.example.truyenol.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -56,14 +57,14 @@ public class MainDangNhap extends AppCompatActivity {
                         String email = cursor.getString(4);
                         String fullname = cursor.getString(3);
                         Intent intent = new Intent(MainDangNhap.this, HomeActivity.class);
-                        Bundle bundle = new Bundle();
-                        // gửi dữ liệu qua mainactice
-                        bundle.putString("linkAva",linkAva);
-                        bundle.putInt("idUser",idd);
-                        bundle.putString("fullname",fullname);
-                        bundle.putString("email",email);
-                        bundle.putString("position",phanquyen);
-                        intent.putExtras(bundle);
+                        SharedPreferences sharedPreferences = getSharedPreferences("User",getApplicationContext().MODE_PRIVATE);
+                        SharedPreferences.Editor edit = sharedPreferences.edit();
+                        edit.putString("linkAva",linkAva);
+                        edit.putInt("idUser",idd);
+                        edit.putString("fullname",fullname);
+                        edit.putString("email",email);
+                        edit.putString("position",phanquyen);
+                        edit.commit();
                         startActivity(intent);
                         Log.d("Sai thông tin đăng nhập","Thử lại");
                         if (tentaikhoan.equals("") || matkhau.equals("")){

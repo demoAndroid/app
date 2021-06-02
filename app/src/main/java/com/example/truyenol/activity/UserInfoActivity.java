@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,15 +19,12 @@ public class UserInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        if(bundle!=null){
-            idUser = bundle.getInt("idUser");
-            fullname = bundle.getString("fullname");
-            position = bundle.getString("position");
-            email = bundle.getString("email");
-            linkAva = bundle.getString("linkAva");
-        }
+
+        idUser = getSharedPreferences("User",MODE_PRIVATE).getInt("idUser",0);
+        fullname = getSharedPreferences("User",MODE_PRIVATE).getString("fullname",null);
+        position = getSharedPreferences("User",MODE_PRIVATE).getString("position",null);
+        email = getSharedPreferences("User",MODE_PRIVATE).getString("email",null);
+        linkAva = getSharedPreferences("User",MODE_PRIVATE).getString("linkAva",null);
 
         ImageView avaInfo = (ImageView)findViewById(R.id.avaInfo);
         Glide.with(getApplicationContext()).load(linkAva).into(avaInfo);
