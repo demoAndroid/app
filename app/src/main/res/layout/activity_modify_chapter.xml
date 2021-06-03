@@ -8,14 +8,14 @@
 
     <Spinner
         android:id="@+id/chapterSpn"
-        android:layout_width="72dp"
-        android:layout_height="40dp"
+        android:layout_width="89dp"
+        android:layout_height="49dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.528"
+        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.174" />
+        app:layout_constraintVertical_bias="0.158" />
 
     <EditText
         android:id="@+id/contentTxt"

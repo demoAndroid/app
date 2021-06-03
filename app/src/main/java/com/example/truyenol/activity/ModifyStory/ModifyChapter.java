@@ -1,29 +1,22 @@
 package com.example.truyenol.activity.ModifyStory;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.truyenol.R;
 import com.example.truyenol.database.DatabaseHandler;
 import com.example.truyenol.model.Chapter;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class ModifyChapter extends AppCompatActivity {
@@ -86,6 +79,8 @@ public class ModifyChapter extends AppCompatActivity {
         addBtn.setEnabled(true);
         modBtn.setEnabled(true);
         delBtn.setEnabled(true);
+        nameChapTxt.setText("");
+        contentTxt.setText("");
     }
     public void addChapter(){
         contentTxt.setEnabled(true);
