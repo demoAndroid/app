@@ -266,12 +266,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public List<Comment> getCommnet(int idStory){
         List<Comment> listComment = new ArrayList<>();
-        User user = new User();
-        SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT * FROM comment INNER JOIN user ON comment.idUser = user.idUser WHERE comment.idStory = " + idStory;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM comment INNER JOIN user ON comment.idUser = user.idUser WHERE idStory = " + idStory;
         Cursor cursor = db.rawQuery(query,null);
         if (cursor.moveToFirst()) {
             do {
+                User user = new User();
                 Comment comment = new Comment();
                 comment.setId(cursor.getInt(0));
                 comment.setComment(cursor.getString(1));

@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
@@ -16,7 +17,6 @@ import com.example.truyenol.R;
 import com.example.truyenol.database.DatabaseHandler;
 import com.example.truyenol.model.Comment;
 import com.example.truyenol.model.User;
-import com.google.android.material.chip.Chip;
 
 public class InfoStoryActivity extends AppCompatActivity {
     int idStory;
@@ -50,7 +50,7 @@ public class InfoStoryActivity extends AppCompatActivity {
         readBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1 = new Intent(getApplicationContext(), StoryChapterActivity.class);
+                Intent intent1 = new Intent(getApplicationContext(), ChapterActivity.class);
                 intent1.putExtras(bundle);
                 startActivity(intent1);
             }
@@ -79,6 +79,8 @@ public class InfoStoryActivity extends AppCompatActivity {
 
                 DatabaseHandler db = new DatabaseHandler(getBaseContext());
                 db.addComment(comment1,idStory);
+                db.close();
+                Toast.makeText(InfoStoryActivity.this,"Đã thêm bình luận",Toast.LENGTH_LONG).show();
             }
         });
         showCommentBtn.setOnClickListener(new View.OnClickListener() {

@@ -81,7 +81,7 @@ public class ModifyStory extends AppCompatActivity {
         db.updateStory(story);
         db.close();
         Toast.makeText(this, "Save data success!", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, AdminActivity.class);
         finish();
         startActivity(intent);
     }

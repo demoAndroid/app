@@ -34,7 +34,7 @@ public class DeleteStory extends AppCompatActivity {
         noBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(DeleteStory.this,MainActivity.class);
+                Intent intent =new Intent(DeleteStory.this, AdminActivity.class);
                 finish();
                 startActivity(intent);
             }

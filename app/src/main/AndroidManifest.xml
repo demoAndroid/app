@@ -25,11 +25,11 @@
         <activity android:name=".activity.ModifyStory.SearchStory" />
         <activity android:name=".activity.ModifyStory.ModifyChapter" />
         <activity android:name=".activity.ContentActivity" />
-        <activity android:name=".activity.StoryChapterActivity" />
+        <activity android:name=".activity.ChapterActivity" />
         <activity android:name=".activity.ModifyStory.AddStory" />
         <activity android:name=".activity.ModifyStory.ModifyStory" />
         <activity android:name=".activity.ModifyStory.DeleteStory" />
-        <activity android:name=".activity.ModifyStory.MainActivity"></activity>
+        <activity android:name=".activity.ModifyStory.AdminActivity"></activity>
         <activity android:name=".activity.HomeActivity"></activity>
         <activity android:name=".activity.MainDangKy" />
         <activity android:name=".activity.MainDangNhap">

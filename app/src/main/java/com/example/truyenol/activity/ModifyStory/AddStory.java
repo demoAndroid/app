@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -84,7 +83,7 @@ public class AddStory extends AppCompatActivity {
         db.addStory(story);
         db.close();
         Toast.makeText(this,"Save data success!",Toast.LENGTH_SHORT).show();
-        Intent intent=new Intent(this,MainActivity.class);
+        Intent intent=new Intent(this, AdminActivity.class);
         finish();
         startActivity(intent);
     }

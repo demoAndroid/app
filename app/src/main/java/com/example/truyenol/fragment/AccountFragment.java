@@ -19,12 +19,10 @@ import com.bumptech.glide.Glide;
 import com.example.truyenol.R;
 import com.example.truyenol.activity.MainCovid;
 import com.example.truyenol.activity.MainDangNhap;
-import com.example.truyenol.activity.ModifyStory.MainActivity;
+import com.example.truyenol.activity.ModifyStory.AdminActivity;
 import com.example.truyenol.activity.UserInfoActivity;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.io.File;
 
 import static android.view.View.GONE;
 
@@ -61,7 +59,7 @@ public class AccountFragment extends Fragment {
         editStory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), MainActivity.class);
+                Intent intent = new Intent(getContext(), AdminActivity.class);
                 startActivity(intent);
             }
         });

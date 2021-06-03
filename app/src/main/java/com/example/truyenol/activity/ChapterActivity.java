@@ -15,7 +15,7 @@ import com.example.truyenol.model.Chapter;
 
 import java.util.ArrayList;
 
-public class StoryChapterActivity extends AppCompatActivity {
+public class ChapterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
