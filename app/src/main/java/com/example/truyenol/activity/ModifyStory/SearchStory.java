@@ -1,7 +1,5 @@
 package com.example.truyenol.activity.ModifyStory;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +7,8 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.truyenol.R;
 import com.example.truyenol.adapter.StoryListViewAdapter;
@@ -58,7 +58,7 @@ public class SearchStory extends AppCompatActivity {
             else if(act==2)
                 intent = new Intent(this,DeleteStory.class);
             else
-                intent = new Intent(this,ModifyChapter.class);;
+                intent = new Intent(this,ModifyChapter.class);
             intent.putExtra("id",String.valueOf(storyList.get(position).getId()));
             intent.putExtra("chapterNumber",String.valueOf(storyList.get(position).getNumberChapter()));
             finish();

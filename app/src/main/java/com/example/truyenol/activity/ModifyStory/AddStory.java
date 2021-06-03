@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -47,7 +46,6 @@ public class AddStory extends AppCompatActivity {
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,type);
         typeSpinner.setAdapter(arrayAdapter);
-        String typeTxt = typeSpinner.getSelectedItem().toString();
         //Set linkAvaBtn
         linkAvaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
